@@ -296,6 +296,7 @@ for (const [i, el] of menu.entries()) {
 // TODO: Enhanced Object Literals
 
 // TODO: Optional Chaining (?.)
+/*
 console.log(restaurant.openingHours.mon?.open);
 console.log(restaurant.openingHours?.mon?.open);
 
@@ -319,3 +320,117 @@ const users = [
 ];
 
 console.log(users[0]?.name ?? "User array empty");
+*/
+
+// TODO: Looping Objects: Object Keys, Object Values, and Entries
+/*
+// Property name
+const property = Object.keys(openingHours);
+console.log(property);
+
+let openStr = `We are open on ${property.length} days: `;
+for (const day of property) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property values
+const values = Object.values(openingHours);
+console.log(values);
+
+// Entire object
+const entries = Object.entries(openingHours);
+// console.log(entries);
+
+for (const [day, { open, close }] of entries) {
+  console.log(`On ${day}, we open at ${open} and close at ${close}`);
+}
+*/
+
+// TODO: Sets
+/*
+const orderSet = new Set([
+  "Pizza",
+  "Pasta",
+  "Pizza",
+  "Pizza",
+  "Pasta",
+  "Risotto",
+]);
+console.log(orderSet);
+
+console.log(new Set("Samba"));
+
+console.log(orderSet.size);
+console.log(orderSet.has("Pizza"));
+console.log(orderSet.has("Pasta"));
+orderSet.add("Garlic Bread");
+orderSet.add("Garlic Bread");
+orderSet.delete("Risotto");
+console.log(orderSet);
+
+for (const order of orderSet) {
+  console.log(order);
+}
+
+// Example
+const staff = ["Waiter", "Chef", "Waiter", "Manager", "Chef"];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(new Set(["Waiter", "Chef", "Waiter", "Manager", "Chef"]).size);
+
+console.log(new Set("gustionusamba").size);
+*/
+
+// TODO: Maps Fundamentals
+/*
+const rest = new Map();
+rest.set("name", "Classico Italiano");
+rest.set(1, "Forenze", "Italy");
+console.log(rest.set(2, "Lisbon, Portugal"));
+
+rest
+  .set("categories", ["Italian", "Pizzeria", "Vegetarian", "Organic"])
+  .set("open", 11)
+  .set("close", 23)
+  .set(true, "We are open")
+  .set(false, "We are closed");
+
+console.log(rest.get("name"));
+console.log(rest.get(true));
+console.log(rest.get("categories"));
+console.log(rest.get("categories"));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get("open") && time < rest.get("close")));
+
+console.log(rest.has("categories"));
+rest.delete(2);
+console.log(rest);
+const arr = [1, 2];
+rest.set(arr, "Test");
+
+console.log(rest);
+console.log(rest.size);
+console.log(rest.get(arr));
+*/
+
+// TODO: Maps Iteration
+/*
+const question = new Map([
+  ["question", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "Javascript"],
+  ["correct", 3],
+  [true, "Correct"],
+  [false, "Try again!"],
+]);
+console.log(question);
+
+console.log(question.get("question"));
+for (const [key, value] of question) {
+  if (typeof key === "number") console.log(`Answer ${key}: ${value}`);
+}
+*/
