@@ -578,3 +578,4 @@ const planesInLine = function (n) {
 planesInLine(5);
 planesInLine(3);
 planesInLine(12);
+planesInLine(50);
