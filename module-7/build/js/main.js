@@ -9,17 +9,7 @@ var Direction;
 })(Direction || (Direction = {}));
 let moveUp = Direction.Up;
 console.log(moveUp);
-var Days;
-(function (Days) {
-    Days["MONDAY"] = "mon";
-    Days["TUESDAY"] = "tue";
-    Days["WEDNESDAY"] = "wed";
-    Days["THURSDAY"] = "thu";
-    Days["FRIDAY"] = "fri";
-    Days["SATURDAY"] = "sat";
-    Days["SUNDAY"] = "sun";
-})(Days || (Days = {}));
 function dayOfExam(participant, day) {
     console.log(`Your name is ${participant}, and your exam date will be ${day}`);
 }
-dayOfExam("Mas Agus", Days.THURSDAY);
+dayOfExam("Mas Agus", "thu" /* Days.THURSDAY */);

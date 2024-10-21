@@ -9,7 +9,7 @@ enum Direction {
 let moveUp: Direction = Direction.Up;
 console.log(moveUp);
 
-enum Days {
+const enum Days {
   MONDAY = "mon",
   TUESDAY = "tue",
   WEDNESDAY = "wed",
