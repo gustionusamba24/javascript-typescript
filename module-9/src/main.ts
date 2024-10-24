@@ -1,5 +1,10 @@
-function greet(name: string): void {
-  console.log(`Hello ${name}`);
+// function
+function greet(name: string, age?: number): string {
+  if (age) {
+    return `Hello ${name}, your age is ${age} years old`;
+  }
+  return `Hello ${name}`;
 }
 
-greet("Skylar");
+console.log(greet("Skylar"));
+console.log(greet("Franco", 45));

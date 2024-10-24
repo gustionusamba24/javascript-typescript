@@ -1,5 +1,10 @@
 "use strict";
-function greet(name) {
-    console.log(`Hello ${name}`);
+// function
+function greet(name, age) {
+    if (age) {
+        return `Hello ${name}, your age is ${age} years old`;
+    }
+    return `Hello ${name}`;
 }
-greet("Skylar");
+console.log(greet("Skylar"));
+console.log(greet("Franco", 45));
