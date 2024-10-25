@@ -1,41 +1,32 @@
-class Product {
-  public name: string;
-  public price: number;
-
-  constructor(name: string, price: number) {
-    this.name = name;
-    this.price = price;
-  }
-
-  public displayProduct(): void {
-    console.log(`Product: ${this.name}, Price: ${this.price}`);
+class Animal {
+  makeSound(): void {
+    console.log("Some generic animal sound");
   }
 }
 
-class Electronic extends Product {
-  warranty: number;
-
-  constructor(name: string, price: number, warranty: number) {
-    super(name, price);
-    this.warranty = warranty;
-  }
-
-  displayElectronic(): void {
-    super.displayProduct();
-    console.log(`Warranty: ${this.warranty} years`);
+class Dog extends Animal {
+  makeSound(): void {
+    console.log("Bark");
   }
 }
 
-const electronic1 = new Electronic("Smartphone", 4000000, 2);
+class Wolf extends Animal {
+  makeSound(): void {
+    console.log("Woof");
+  }
+}
 
-console.log(electronic1);
-electronic1.displayElectronic();
-// electronic1.displayProduct();
+class Cat extends Animal {
+  makeSound(): void {
+    console.log("Miaw");
+  }
+}
 
-// const product1 = new Product("Laptop", 20000000);
-// const product2 = new Product("Handphone", 8000000);
+const herder = new Dog();
+herder.makeSound();
 
-// console.log(product1);
-// console.log(product2);
-// product1.displayProduct();
-// product2.displayProduct();
+const wolf = new Wolf();
+wolf.makeSound();
+
+const persia = new Cat();
+persia.makeSound();
