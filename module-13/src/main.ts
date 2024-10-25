@@ -1,5 +1,11 @@
 class Product {
-  constructor(public name: string, public price: number) {}
+  public name: string;
+  public price: number;
+
+  constructor(name: string, price: number) {
+    this.name = name;
+    this.price = price;
+  }
 
   public displayProduct(): void {
     console.log(`Product: ${this.name}, Price: ${this.price}`);
@@ -7,14 +13,14 @@ class Product {
 }
 
 class Electronic extends Product {
-  public warranty: number;
+  warranty: number;
 
   constructor(name: string, price: number, warranty: number) {
     super(name, price);
     this.warranty = warranty;
   }
 
-  public displayElectronic(): void {
+  displayElectronic(): void {
     super.displayProduct();
     console.log(`Warranty: ${this.warranty} years`);
   }
