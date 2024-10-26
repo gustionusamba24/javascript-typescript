@@ -22,12 +22,20 @@
 // console.log(stringBox.getContent());
 
 // Generic Interface
-interface User<T, U> {
-  name: T;
-  age: U;
+// interface User<T, U> {
+//   name: T;
+//   age: U;
+// }
+
+// const user1: User<string, number> = {
+//   name: "Darwin Nunez",
+//   age: 25,
+// };
+
+// Generic Constraint
+function printLength<T extends { length: number }>(item: T): void {
+  console.log(item.length);
 }
 
-const user1: User<string, number> = {
-  name: "Darwin Nunez",
-  age: 25,
-};
+printLength([1.2, 3, 4, 5.6, 99.1]);
+printLength<string>("Gustio Nusamba");
