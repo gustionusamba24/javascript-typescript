@@ -41,3 +41,5 @@ console.log(Boolean(null));
 console.log(Boolean(NaN));
 console.log(Boolean("Samba"));
 console.log(Boolean(24));
+console.log("18" === 18);
+console.log("18" == 18);
