@@ -42,3 +42,12 @@ console.log(Number("24") - Number("5") - 9);
 let n: any = "1" + 1;
 n = n - 1;
 console.log(n);
+
+// truthy and falsy
+console.log(Boolean(0));
+console.log(Boolean(""));
+console.log(Boolean(undefined));
+console.log(Boolean(null));
+console.log(Boolean(NaN));
+console.log(Boolean("Samba"));
+console.log(Boolean(24));
