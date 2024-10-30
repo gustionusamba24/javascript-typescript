@@ -1,4 +1,6 @@
+"use strict";
 // Simple function
+/*
 function logger(): void {
   console.log("My name is Samba");
 }
@@ -14,3 +16,15 @@ function fruitProcessor(apples: number, oranges: number): string {
 }
 
 console.log(fruitProcessor(4, 10));
+*/
+// Function Declaration
+console.log(calcAge1(2000));
+function calcAge1(birthYear) {
+    const age = 2024 - birthYear;
+    return age;
+}
+// Function Expression: produce value
+const calcAge2 = function (birthYear) {
+    return 2024 - birthYear;
+};
+console.log(calcAge2(1945));
