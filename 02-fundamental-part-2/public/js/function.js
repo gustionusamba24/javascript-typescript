@@ -62,9 +62,6 @@ const yearsUntilRetirement = function (firstName, birthYear) {
 console.log(yearsUntilRetirement("Darwin", 1999));
 console.log(yearsUntilRetirement("Cristiano", 1985));
 console.log(yearsUntilRetirement("Carlo", 1959));
-// let area: (radius: number) => number = (r) => 3.14 * r * r;
-console.log(area(7));
-let sns = map((n) => n.toString(), [1, 2, 3]);
 function area(s) {
     if (s.kind === "circle") {
         return Math.PI * s.radius * s.radius;
@@ -76,3 +73,12 @@ function area(s) {
         return (s.x * s.y) / 2;
     }
 }
+console.log(area({ kind: "circle", radius: 5 }));
+function doSomething(fn) {
+    console.log(fn.description + " returned " + fn(6));
+}
+function myFunc(someArg) {
+    return someArg > 3;
+}
+myFunc.description = "default description";
+doSomething(myFunc);

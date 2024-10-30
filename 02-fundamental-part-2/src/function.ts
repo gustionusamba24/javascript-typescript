@@ -77,8 +77,8 @@ console.log(yearsUntilRetirement("Carlo", 1959));
 
 // console.log(area(7));
 
-declare function map<T, U>(f: (t: T) => U, ts: T[]): U[];
-let sns = map((n: number): string => n.toString(), [1, 2, 3]);
+// declare function map<T, U>(f: (t: T) => U, ts: T[]): U[];
+// let sns = map((n: number): string => n.toString(), [1, 2, 3]);
 
 type Shape =
   | { kind: "circle"; radius: number }
@@ -94,3 +94,20 @@ function area(s: Shape): number | undefined {
     return (s.x * s.y) / 2;
   }
 }
+
+console.log(area({ kind: "circle", radius: 5 }));
+
+type DescribableFunction = {
+  description: string;
+  (someArg: number): boolean;
+};
+function doSomething(fn: DescribableFunction) {
+  console.log(fn.description + " returned " + fn(6));
+}
+
+function myFunc(someArg: number): boolean {
+  return someArg > 3;
+}
+myFunc.description = "default description";
+
+doSomething(myFunc);
