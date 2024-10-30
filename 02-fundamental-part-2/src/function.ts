@@ -75,7 +75,7 @@ console.log(yearsUntilRetirement("Carlo", 1959));
 
 // let area: (radius: number) => number = (r) => 3.14 * r * r;
 
-console.log(area(7));
+// console.log(area(7));
 
 declare function map<T, U>(f: (t: T) => U, ts: T[]): U[];
 let sns = map((n: number): string => n.toString(), [1, 2, 3]);
