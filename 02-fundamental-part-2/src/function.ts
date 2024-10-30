@@ -72,3 +72,25 @@ const yearsUntilRetirement = function (
 console.log(yearsUntilRetirement("Darwin", 1999));
 console.log(yearsUntilRetirement("Cristiano", 1985));
 console.log(yearsUntilRetirement("Carlo", 1959));
+
+// let area: (radius: number) => number = (r) => 3.14 * r * r;
+
+console.log(area(7));
+
+declare function map<T, U>(f: (t: T) => U, ts: T[]): U[];
+let sns = map((n: number): string => n.toString(), [1, 2, 3]);
+
+type Shape =
+  | { kind: "circle"; radius: number }
+  | { kind: "square"; x: number }
+  | { kind: "triangle"; x: number; y: number };
+
+function area(s: Shape): number | undefined {
+  if (s.kind === "circle") {
+    return Math.PI * s.radius * s.radius;
+  } else if (s.kind === "square") {
+    return s.x * s.x;
+  } else if (s.kind === "triangle") {
+    return (s.x * s.y) / 2;
+  }
+}
