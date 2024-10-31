@@ -10,10 +10,7 @@ function evict(home) {
     //     age: 42,
     //   };
 }
-let writablePerson = {
-    name: "Person McPersonface",
-    age: 42,
-};
+let writablePerson = { name: "Person McPersonface", age: 42 };
 let readonlyerson = writablePerson;
 console.log(readonlyerson.age); // prints '42'
 writablePerson.age++;

@@ -25,10 +25,7 @@ interface ReadonlyPerson {
   readonly age: number;
 }
 
-let writablePerson: Person = {
-  name: "Person McPersonface",
-  age: 42,
-};
+let writablePerson: Person = { name: "Person McPersonface", age: 42 };
 
 let readonlyerson: ReadonlyPerson = writablePerson;
 
