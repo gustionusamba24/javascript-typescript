@@ -1,5 +1,5 @@
 "use strict";
-const restaurant = {
+const restaurantArr = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
     categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -14,7 +14,7 @@ const [a, b, c] = arr;
 console.log(a);
 console.log(b);
 console.log(c);
-let [main, , secondary] = restaurant.categories;
+let [main, , secondary] = restaurantArr.categories;
 console.log(main);
 console.log(secondary);
 // Switching variables using destructuring
@@ -22,7 +22,7 @@ console.log(secondary);
 console.log(main);
 console.log(secondary);
 // Receive 2 return values from a function
-const [starterCourse, mainCourse] = restaurant.order(2, 0);
+const [starterCourse, mainCourse] = restaurantArr.order(2, 0);
 console.log(starterCourse + ", " + mainCourse);
 // Nested destructuring
 const nested = [2, 4, [5, 6, [8, 9]], 10];

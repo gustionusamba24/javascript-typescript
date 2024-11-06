@@ -1,4 +1,4 @@
-type RestaurantType = {
+type RestaurantTypeArr = {
   name: string;
   location: string;
   categories: string[];
@@ -7,7 +7,7 @@ type RestaurantType = {
   order: (starterIndex: number, mainIndex: number) => string[];
 };
 
-const restaurant: RestaurantType = {
+const restaurantArr: RestaurantTypeArr = {
   name: "Pizza Hut",
   location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -24,7 +24,7 @@ console.log(a);
 console.log(b);
 console.log(c);
 
-let [main, , secondary] = restaurant.categories;
+let [main, , secondary] = restaurantArr.categories;
 console.log(main);
 console.log(secondary);
 
@@ -34,7 +34,7 @@ console.log(main);
 console.log(secondary);
 
 // Receive 2 return values from a function
-const [starterCourse, mainCourse] = restaurant.order(2, 0);
+const [starterCourse, mainCourse] = restaurantArr.order(2, 0);
 console.log(starterCourse + ", " + mainCourse);
 
 // Nested destructuring
