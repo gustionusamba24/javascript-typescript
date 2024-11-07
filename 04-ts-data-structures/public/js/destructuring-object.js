@@ -1,5 +1,5 @@
 "use strict";
-const restaurant = {
+const restaurantObj = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
     categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -26,22 +26,22 @@ const restaurant = {
         console.log(`Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
     },
 };
-restaurant.orderDelivery({
+restaurantObj.orderDelivery({
     address: "Gondangan Ringinsari, Maguwoharjo, Depok, Sleman, Yogyakarta",
     time: "22.00",
     mainIndex: 2,
     starterIndex: 2,
 });
-const { name: restaurantName, categories, openingHours } = restaurant;
+const { name: restaurantName, categories, openingHours } = restaurantObj;
 console.log(restaurantName);
 console.log(categories);
 console.log(openingHours);
-const { name: restaurantName2, categories: tags, openingHours: hours, } = restaurant;
+const { name: restaurantName2, categories: tags, openingHours: hours, } = restaurantObj;
 console.log(restaurantName2);
 console.log(tags);
 console.log(hours);
 // Defauult Values
-const { menu = [], starterMenu: starters = [] } = restaurant;
+const { menu = [], starterMenu: starters = [] } = restaurantObj;
 console.log(menu, starters);
 // Mutating Variables
 let e = 111;

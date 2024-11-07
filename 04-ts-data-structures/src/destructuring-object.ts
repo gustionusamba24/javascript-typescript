@@ -1,4 +1,4 @@
-type RestaurantType = {
+type RestaurantTypeObj = {
   name: string;
   location: string;
   categories: string[];
@@ -18,7 +18,7 @@ type RestaurantType = {
   }) => void;
 };
 
-const restaurant: RestaurantType = {
+const restaurantObj: RestaurantTypeObj = {
   name: "Pizza Hut",
   location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -49,14 +49,14 @@ const restaurant: RestaurantType = {
   },
 };
 
-restaurant.orderDelivery({
+restaurantObj.orderDelivery({
   address: "Gondangan Ringinsari, Maguwoharjo, Depok, Sleman, Yogyakarta",
   time: "22.00",
   mainIndex: 2,
   starterIndex: 2,
 });
 
-const { name: restaurantName, categories, openingHours } = restaurant;
+const { name: restaurantName, categories, openingHours } = restaurantObj;
 console.log(restaurantName);
 console.log(categories);
 console.log(openingHours);
@@ -65,13 +65,13 @@ const {
   name: restaurantName2,
   categories: tags,
   openingHours: hours,
-} = restaurant;
+} = restaurantObj;
 console.log(restaurantName2);
 console.log(tags);
 console.log(hours);
 
 // Defauult Values
-const { menu = [], starterMenu: starters = [] } = restaurant;
+const { menu = [], starterMenu: starters = [] } = restaurantObj;
 console.log(menu, starters);
 
 // Mutating Variables
