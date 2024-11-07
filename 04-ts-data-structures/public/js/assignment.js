@@ -224,6 +224,7 @@ const books = [
     },
 ];
 // Destructuring Arrays
+console.log("==================== Destructuring Arrays ====================");
 // 1.1
 const [firstBook, secondBook] = books;
 console.log(firstBook);
@@ -243,3 +244,41 @@ console.log(ratingsCount);
 const ratingStars = [63405, 1808];
 const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
+// Destructuring Objects
+console.log("==================== Destructuring Objects ====================");
+// 2.1
+const { title, author, ISBN } = firstBook;
+console.log(title);
+console.log(author);
+console.log(ISBN);
+// 2.2
+const { keywords: bookTags } = firstBook;
+console.log(bookTags);
+// 2.3
+const { language, programmingLanguage = "unknown" } = books[6];
+console.log(language);
+console.log(programmingLanguage);
+// 2.4
+let bookTitle = "unknown";
+let bookAuthor = "unknown";
+({ title: bookTitle, author: bookAuthor } = {
+    title: firstBook.title,
+    author: Array.isArray(firstBook.author)
+        ? firstBook.author.join(", ")
+        : firstBook.author,
+});
+console.log(bookTitle);
+console.log(bookAuthor);
+// 2.5
+const { thirdParty: { goodreads: { rating: bookRating }, }, } = books[0];
+console.log(bookRating);
+// 2.6
+const printBookInfo = function ({ title, author, year = "unknown", }) {
+    console.log(`${title} by ${author}, ${year}`);
+};
+printBookInfo({
+    title: "Algorithms",
+    author: "Robert Sedgewick",
+    year: "2011",
+});
+printBookInfo({ title: "Algorithms", author: "Robert Sedgewick" });
