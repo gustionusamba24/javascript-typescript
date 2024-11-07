@@ -282,3 +282,13 @@ printBookInfo({
     year: "2011",
 });
 printBookInfo({ title: "Algorithms", author: "Robert Sedgewick" });
+// Spread Operator
+console.log("==================== Spread Operator ====================");
+// 3.1
+const bookAuthors = [...firstBook.author, ...secondBook.author];
+console.log(bookAuthors);
+// 3.2
+const spellWord = function (word) {
+    console.log(...word);
+};
+spellWord("JavaScript");
