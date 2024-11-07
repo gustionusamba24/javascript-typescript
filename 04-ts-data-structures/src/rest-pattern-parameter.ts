@@ -1,4 +1,4 @@
-type RestaurantTypeSO = {
+type RestaurantType = {
   name: string;
   location: string;
   categories: string[];
@@ -17,9 +17,10 @@ type RestaurantTypeSO = {
     mainIndex: number;
   }) => void;
   orderPizza: (ing1: string, ing2: string, ing3: string) => void;
+  orderPasta: (mainIngredient: string, ...otherIngredients: string[]) => void;
 };
 
-const restaurantSO: RestaurantTypeSO = {
+const restaurant: RestaurantType = {
   name: "Pizza Hut",
   location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -54,53 +55,55 @@ const restaurantSO: RestaurantTypeSO = {
       `Here is your delicious pizza with ${ing1}, ${ing2}, and ${ing3}`
     );
   },
+
+  orderPasta: function (
+    mainIngredient: string,
+    ...otherIngredients: string[]
+  ): void {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 };
 
-const arrSO: number[] = [7, 8, 9];
-const newArr: number[] = [1, 2, ...arrSO];
-console.log(newArr);
+// Spread Operator = unpack the array
+// Rest Pattern = pack elements into an array
 
-console.log(...newArr);
-console.log(...arrSO);
+// Destructuring Part
+// SPREAD, because on RIGHT side of =
+const arrRP: number[] = [1, 2, ...[3, 4]];
 
-const newMenu: string[] = [...restaurantSO.mainMenu, "Gnocci"];
-console.log(newMenu);
+// REST, because on LEFT side of =
+const [x, y, ...others] = [1, 2, 3, 4, 5];
+console.log(x, y, others);
 
-// Copy array
-const mainMenuCopy: string[] = [...restaurantSO.mainMenu];
-console.log(mainMenuCopy);
-
-// Join 2 arrays
-const menuSO: string[] = [
-  ...restaurantSO.mainMenu,
-  ...restaurantSO.starterMenu,
+// REST is always must be the last in the destructuring assignment
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
 ];
-console.log(menuSO);
-console.log(...menuSO);
-
-// Iterable: arrays, strings, maps, sets, and NOT objects
-const str: string = "Balmond";
-const letters: string[] = [...str, " ", "A."];
-console.log(letters);
-console.log(...str);
-
-// Real world examples
-// const ingredients: (string | null)[] = [
-//   prompt("Let's make pizza! Ingredient 1?"),
-//   prompt("Ingredient 2?"),
-//   prompt("Ingredient 3?"),
-// ];
-// console.log(...ingredients);
+console.log(pizza, risotto, otherFood);
 
 // Objects
-const newRestaurant = {
-  foundedIn: 1958,
-  ...restaurantSO,
-  founder: "Frank Carney",
-};
-console.log(newRestaurant);
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(weekDays);
+console.log(sat);
 
-const restaurantCopy = { ...restaurantSO };
-restaurantCopy.name = "Pizza Hut Indonesia";
-console.log(restaurantSO.name);
-console.log(restaurantCopy.name);
+// Functions
+const addRP = function (...numbers: number[]): void {
+  let sum: number = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+
+addRP(2, 3);
+addRP(5, 3, 7, 2);
+addRP(8, 2, 5, 3, 2, 1, 4);
+
+const xx = [23, 5, 7];
+addRP(...xx);
+
+restaurant.orderPasta("mushrooms", "onion", "olives", "spinach");
+console.log("mushrooms");
+console.log("onion");

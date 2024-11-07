@@ -1,5 +1,5 @@
 "use strict";
-const restaurant = {
+const restaurantSO = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
     categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -34,13 +34,16 @@ const newArr = [1, 2, ...arrSO];
 console.log(newArr);
 console.log(...newArr);
 console.log(...arrSO);
-const newMenu = [...restaurant.mainMenu, "Gnocci"];
+const newMenu = [...restaurantSO.mainMenu, "Gnocci"];
 console.log(newMenu);
 // Copy array
-const mainMenuCopy = [...restaurant.mainMenu];
+const mainMenuCopy = [...restaurantSO.mainMenu];
 console.log(mainMenuCopy);
 // Join 2 arrays
-const menuSO = [...restaurant.mainMenu, ...restaurant.starterMenu];
+const menuSO = [
+    ...restaurantSO.mainMenu,
+    ...restaurantSO.starterMenu,
+];
 console.log(menuSO);
 console.log(...menuSO);
 // Iterable: arrays, strings, maps, sets, and NOT objects
@@ -56,9 +59,9 @@ console.log(...str);
 // ];
 // console.log(...ingredients);
 // Objects
-const newRestaurant = Object.assign(Object.assign({ foundedIn: 1958 }, restaurant), { founder: "Frank Carney" });
+const newRestaurant = Object.assign(Object.assign({ foundedIn: 1958 }, restaurantSO), { founder: "Frank Carney" });
 console.log(newRestaurant);
-const restaurantCopy = Object.assign({}, restaurant);
+const restaurantCopy = Object.assign({}, restaurantSO);
 restaurantCopy.name = "Pizza Hut Indonesia";
-console.log(restaurant.name);
+console.log(restaurantSO.name);
 console.log(restaurantCopy.name);
