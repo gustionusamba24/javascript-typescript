@@ -1,4 +1,15 @@
 "use strict";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 const books = [
     {
         title: "Algorithms",
@@ -292,3 +303,18 @@ const spellWord = function (word) {
     console.log(...word);
 };
 spellWord("JavaScript");
+// Rest Pattern and Parameters
+console.log("==================== Rest Pattern and Parameters ====================");
+// 4.1
+const [mainKeyword, ...rest] = books[0].keywords;
+console.log(mainKeyword);
+console.log(rest);
+// 4.2
+const _a = books[1], { publisher: bookPublisher } = _a, restOfTheBook = __rest(_a, ["publisher"]);
+console.log(bookPublisher);
+console.log(restOfTheBook);
+// 4.3
+const printBookAuthorsCount = function (title, ...authors) {
+    console.log(`The Book "${title}" has ${authors.length} authors`);
+};
+printBookAuthorsCount("Algorithms", "Robert Sedgewick", "Kevin Wayne");
