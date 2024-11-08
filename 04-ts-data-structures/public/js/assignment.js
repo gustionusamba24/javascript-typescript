@@ -11,6 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 var _a;
+var _b, _c;
 const books = [
     {
         title: "Algorithms",
@@ -311,7 +312,7 @@ const [mainKeyword, ...rest] = books[0].keywords;
 console.log(mainKeyword);
 console.log(rest);
 // 4.2
-const _b = books[1], { publisher: bookPublisher } = _b, restOfTheBook = __rest(_b, ["publisher"]);
+const _d = books[1], { publisher: bookPublisher } = _d, restOfTheBook = __rest(_d, ["publisher"]);
 console.log(bookPublisher);
 console.log(restOfTheBook);
 // 4.3
@@ -337,4 +338,16 @@ console.log("==================== Nullish Coalescing Operator (??) =============
 // 6.1
 for (let i = 0; i < books.length; i++) {
     (_a = books[i].onlineContent) !== null && _a !== void 0 ? _a : console.log(`"${books[i].title}" provides  no data about its online content`);
+}
+// Logical Assignment Operator
+console.log("==================== Logical Assignment Operator ====================");
+// 7.1
+for (let i = 0; i < books.length; i++) {
+    (_b = books[i]).edition || (_b.edition = 1);
+    console.log(`"${books[i].title}" has ${books[i].edition} edition(s)`);
+}
+// 7.2
+for (let i = 0; i < books.length; i++) {
+    (_c = books[i]).highlighted && (_c.highlighted = !(books[i].thirdParty.goodreads.rating < 4.2));
+    console.log(`"${books[i].title}" is highlighted: ${books[i].highlighted}`);
 }

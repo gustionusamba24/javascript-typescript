@@ -370,3 +370,19 @@ for (let i = 0; i < books.length; i++) {
       `"${books[i].title}" provides  no data about its online content`
     );
 }
+
+// Logical Assignment Operator
+console.log(
+  "==================== Logical Assignment Operator ===================="
+);
+// 7.1
+for (let i = 0; i < books.length; i++) {
+  books[i].edition ||= 1;
+  console.log(`"${books[i].title}" has ${books[i].edition} edition(s)`);
+}
+
+// 7.2
+for (let i = 0; i < books.length; i++) {
+  books[i].highlighted &&= !(books[i].thirdParty.goodreads.rating < 4.2);
+  console.log(`"${books[i].title}" is highlighted: ${books[i].highlighted}`);
+}
