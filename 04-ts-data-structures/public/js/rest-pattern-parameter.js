@@ -10,7 +10,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
-const restaurant = {
+const restaurantRP = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
     categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -54,12 +54,12 @@ const [x, y, ...others] = [1, 2, 3, 4, 5];
 console.log(x, y, others);
 // REST is always must be the last in the destructuring assignment
 const [pizza, , risotto, ...otherFood] = [
-    ...restaurant.mainMenu,
-    ...restaurant.starterMenu,
+    ...restaurantRP.mainMenu,
+    ...restaurantRP.starterMenu,
 ];
 console.log(pizza, risotto, otherFood);
 // Objects
-const _a = restaurant.openingHours, { sat } = _a, weekDays = __rest(_a, ["sat"]);
+const _a = restaurantRP.openingHours, { sat } = _a, weekDays = __rest(_a, ["sat"]);
 console.log(weekDays);
 console.log(sat);
 // Functions
@@ -75,6 +75,6 @@ addRP(5, 3, 7, 2);
 addRP(8, 2, 5, 3, 2, 1, 4);
 const xx = [23, 5, 7];
 addRP(...xx);
-restaurant.orderPasta("mushrooms", "onion", "olives", "spinach");
+restaurantRP.orderPasta("mushrooms", "onion", "olives", "spinach");
 console.log("mushrooms");
 console.log("onion");
