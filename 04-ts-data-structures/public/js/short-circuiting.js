@@ -46,12 +46,12 @@ console.log(guest1); // 23
 const guest2 = restaurantSC.numGuests || 10;
 console.log(guest2);
 console.log("=============== AND ===============");
-console.log(0 && "Zilong");
-console.log("Miya" && "Lunox" && 90);
-console.log(undefined && "Lunox" && 90);
-console.log(0 || null || undefined);
-console.log(true && "Irithel");
-console.log("HELLO" && 23 && null && "Jonas");
+// console.log(0 && "Zilong"); // 0
+// console.log("Miya" && "Lunox" && 90); // 90
+// console.log(undefined && "Lunox" && 90); // undefined
+// console.log(0 || null || undefined); // undefined
+// console.log(true && "Irithel"); // "Irithel"
+// console.log("HELLO" && 23 && null && "Jonas"); // null
 // Practice Example
 if (restaurantSC.orderPasta) {
     restaurantSC.orderPasta("Carbonara", "Bacon", "Egg");
