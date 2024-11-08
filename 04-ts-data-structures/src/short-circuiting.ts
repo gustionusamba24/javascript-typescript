@@ -1,5 +1,5 @@
 type RestaurantTypeSC = {
-  numGuests: number;
+  numGuests: undefined | null | number;
   name: string;
   location: string;
   categories: string[];
@@ -97,3 +97,8 @@ if (restaurantSC.orderPasta) {
 }
 
 restaurantSC.orderPasta && restaurantSC.orderPasta("Flour", "Mushroom");
+
+// The Nullist Coalescing Operator (??)
+console.log("=============== NULLIST COALESCING (??) ===============");
+const guestCorrect = restaurantSC.numGuests ?? 10;
+console.log(guestCorrect);
