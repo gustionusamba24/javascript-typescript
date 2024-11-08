@@ -10,6 +10,7 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var _a;
 const books = [
     {
         title: "Algorithms",
@@ -310,7 +311,7 @@ const [mainKeyword, ...rest] = books[0].keywords;
 console.log(mainKeyword);
 console.log(rest);
 // 4.2
-const _a = books[1], { publisher: bookPublisher } = _a, restOfTheBook = __rest(_a, ["publisher"]);
+const _b = books[1], { publisher: bookPublisher } = _b, restOfTheBook = __rest(_b, ["publisher"]);
 console.log(bookPublisher);
 console.log(restOfTheBook);
 // 4.3
@@ -330,4 +331,10 @@ console.log(hasExamplesInJava(books[1]));
 for (let i = 0; i < books.length; i++) {
     books[i].onlineContent &&
         console.log(`"${books[i].title}" provides online content`);
+}
+// Nullish Coalescing Operator (??)
+console.log("==================== Nullish Coalescing Operator (??) ====================");
+// 6.1
+for (let i = 0; i < books.length; i++) {
+    (_a = books[i].onlineContent) !== null && _a !== void 0 ? _a : console.log(`"${books[i].title}" provides  no data about its online content`);
 }
