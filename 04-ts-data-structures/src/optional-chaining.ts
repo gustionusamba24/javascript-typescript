@@ -1,11 +1,11 @@
-type RestaurantTypeEOL = {
+type RestaurantTypeOC = {
   numGuests: undefined | null | number;
   name: string;
   location: string;
   categories: string[];
   starterMenu: string[];
   mainMenu: string[];
-  restaurantOpeningHours: {
+  restaurantSchedule: {
     thu: { open: number; close: number };
     fri: { open: number; close: number };
     sat: { open: number; close: number };
@@ -21,10 +21,18 @@ type RestaurantTypeEOL = {
   orderPasta(mainIngredient: string, ...otherIngredients: string[]): void;
 };
 
-const daysOfWeek: string[] = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+// const daysOfWeekOC: string[] = [
+//   "mon",
+//   "tue",
+//   "wed",
+//   "thu",
+//   "fri",
+//   "sat",
+//   "sun",
+// ];
 
-const restaurantOpeningHoursEOL = {
-  [daysOfWeek[3]]: {
+const restaurantSchedule = {
+  thu: {
     open: 12,
     close: 22,
   },
@@ -38,13 +46,13 @@ const restaurantOpeningHoursEOL = {
   },
 };
 
-const restaurantEOL: RestaurantTypeEOL = {
+const restaurantOC: RestaurantTypeOC = {
   name: "Pizza Hut",
   location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  restaurantOpeningHoursEOL, // Enhanced object literal
+  restaurantSchedule, // Enhanced object literal
 
   order(starterIndex: number, mainIndex: number): string[] {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
@@ -78,3 +86,33 @@ const restaurantEOL: RestaurantTypeEOL = {
   },
   numGuests: 0,
 };
+
+const daysOfWeekOC: string[] = [
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+];
+
+for (const day of daysOfWeekOC) {
+  console.log(day);
+  const open = restaurantOC.restaurantSchedule[day]?.open ?? "closed";
+  console.log(`On ${day}, we open at ${open}`);
+}
+
+// Methods
+console.log(restaurantOC.order?.(0, 1) ?? "Method does not exist");
+console.log(restaurantOC.orderRisotto?.(0, 1) ?? "Method does not exist");
+
+// Arrays
+const usersArray: { name: string; email: string }[] = [
+  { name: "Balmond", email: "hello@balmond.com" },
+];
+console.log(usersArray[0]?.name ?? "User does not found");
+
+console.log(restaurantOC.restaurantSchedule.mon?.open);
+console.log(restaurantOC.restaurantSchedule?.mon?.open);
+console.log(restaurantOC.restaurantSchedule.mon.open);

@@ -1,15 +1,11 @@
-type RestaurantTypeEOL = {
+type RestaurantTypeLO = {
   numGuests: undefined | null | number;
   name: string;
   location: string;
   categories: string[];
   starterMenu: string[];
   mainMenu: string[];
-  restaurantOpeningHours: {
-    thu: { open: number; close: number };
-    fri: { open: number; close: number };
-    sat: { open: number; close: number };
-  };
+  openHours: OpenHours;
   order(starterIndex: number, mainIndex: number): string[];
   orderDelivery(obj: {
     time: string;
@@ -21,10 +17,14 @@ type RestaurantTypeEOL = {
   orderPasta(mainIngredient: string, ...otherIngredients: string[]): void;
 };
 
-const daysOfWeek: string[] = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+type OpenHours = {
+  thu: { open: number; close: number };
+  fri: { open: number; close: number };
+  sat: { open: number; close: number };
+};
 
-const restaurantOpeningHoursEOL = {
-  [daysOfWeek[3]]: {
+const openHours: OpenHours = {
+  thu: {
     open: 12,
     close: 22,
   },
@@ -38,13 +38,13 @@ const restaurantOpeningHoursEOL = {
   },
 };
 
-const restaurantEOL: RestaurantTypeEOL = {
+const restaurantLO: RestaurantTypeLO = {
   name: "Pizza Hut",
   location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
   categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
   starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
   mainMenu: ["Pizza", "Pasta", "Risotto"],
-  restaurantOpeningHoursEOL, // Enhanced object literal
+  openHours,
 
   order(starterIndex: number, mainIndex: number): string[] {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
@@ -78,3 +78,26 @@ const restaurantEOL: RestaurantTypeEOL = {
   },
   numGuests: 0,
 };
+
+// Property name
+const properties = Object.keys(openHours);
+console.log(properties);
+
+let openStr: string = `We are open on ${properties.length} days: `;
+
+for (const day of properties) {
+  openStr += `${day}, `;
+}
+console.log(openStr);
+
+// Property values
+const values = Object.values(openHours);
+console.log(values);
+
+// Entire Objects
+const entries = Object.entries(openHours);
+console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key}, we open at ${open} and close at ${close}`);
+}
