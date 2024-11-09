@@ -1,6 +1,5 @@
 "use strict";
-var _a, _b;
-const restaurantLAO = {
+const restaurantLA = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
     categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
@@ -35,24 +34,17 @@ const restaurantLAO = {
     },
     numGuests: 0,
 };
-const restaurant1 = {
-    name: "Capri",
-    numGuests: 0,
-};
-const restaurant2 = {
-    name: "La Piazza",
-    owner: "Gustavo Lopez",
-};
-// OR assignment operator
-// restaurant1.numGuests = restaurant1.numGuests || 10;
-// restaurant2.numGuests = restaurant2.numGuests || 10;
-// restaurant1.numGuests ||= 10;
-// restaurant2.numGuests ||= 10;
-// Nullish Coalescing Operator
-(_a = restaurant1.numGuests) !== null && _a !== void 0 ? _a : (restaurant1.numGuests = 10);
-(_b = restaurant2.numGuests) !== null && _b !== void 0 ? _b : (restaurant2.numGuests = 10);
-// AND assignment operator
-restaurant1.owner && (restaurant1.owner = "Anonymous");
-restaurant2.owner && (restaurant2.owner = "Anonymous");
-console.log(restaurant1);
-console.log(restaurant2);
+const menuNew = [
+    ...restaurantLA.starterMenu,
+    ...restaurantLA.mainMenu,
+];
+// for of loop just give us the elements of the array
+for (const item of menuNew) {
+    console.log(item);
+}
+// but you can use .entries() as if it had access to index
+for (const [i, el] of menuNew.entries()) {
+    //   console.log(item);
+    console.log(`${i + 1}: ${el}`);
+}
+console.log([...menuNew.entries()]);

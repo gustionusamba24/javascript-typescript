@@ -1,0 +1,97 @@
+type RestaurantTypeLA = {
+  numGuests: undefined | null | number;
+  name: string;
+  location: string;
+  categories: string[];
+  starterMenu: string[];
+  mainMenu: string[];
+  openingHours: {
+    thu: { open: number; close: number };
+    fri: { open: number; close: number };
+    sat: { open: number; close: number };
+  };
+  order: (starterIndex: number, mainIndex: number) => string[];
+  orderDelivery: (obj: {
+    time: string;
+    address: string;
+    starterIndex: number;
+    mainIndex: number;
+  }) => void;
+  orderPizza: (ing1: string, ing2: string, ing3: string) => void;
+  orderPasta: (mainIngredient: string, ...otherIngredients: string[]) => void;
+};
+
+const restaurantLA: RestaurantTypeLA = {
+  name: "Pizza Hut",
+  location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
+  categories: ["Italian", "Pizzeria", "Vegetarian", "Organic"],
+  starterMenu: ["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad"],
+  mainMenu: ["Pizza", "Pasta", "Risotto"],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+
+  order: function (starterIndex: number, mainIndex: number): string[] {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery: function ({
+    time,
+    address,
+    starterIndex,
+    mainIndex,
+  }: {
+    time: string;
+    address: string;
+    starterIndex: number;
+    mainIndex: number;
+  }): void {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPizza: function (ing1: string, ing2: string, ing3: string): void {
+    console.log(
+      `Here is your delicious pizza with ${ing1}, ${ing2}, and ${ing3}`
+    );
+  },
+
+  orderPasta: function (
+    mainIngredient: string,
+    ...otherIngredients: string[]
+  ): void {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
+  numGuests: 0,
+};
+
+const menuNew: string[] = [
+  ...restaurantLA.starterMenu,
+  ...restaurantLA.mainMenu,
+];
+
+// for of loop just give us the elements of the array
+for (const item of menuNew) {
+  console.log(item);
+}
+
+// but you can use .entries() as if it had access to index
+for (const [i, el] of menuNew.entries()) {
+  //   console.log(item);
+  console.log(`${i + 1}: ${el}`);
+}
+
+console.log([...menuNew.entries()]);
