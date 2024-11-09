@@ -1,4 +1,4 @@
-type gameType = {
+type gameType1 = {
   team1: string;
   team2: string;
   players: string[][];
@@ -12,7 +12,7 @@ type gameType = {
   };
 };
 
-const game: gameType = {
+const game1: gameType1 = {
   team1: "Bayern Munich",
   team2: "Borrussia Dortmund",
   players: [
@@ -54,7 +54,7 @@ const game: gameType = {
 };
 
 // 1.
-const [players1, players2] = game.players;
+const [players1, players2] = game1.players;
 console.log(players1);
 console.log(players2);
 
@@ -72,7 +72,7 @@ const players1Final: string[] = [...players1, "Thiago", "Coutinho", "Perisic"];
 console.log(players1Final);
 
 // 5.
-const { team1, x: draw, team2 } = game.odds;
+const { team1, x: draw, team2 } = game1.odds;
 console.log(team1);
 console.log(draw);
 console.log(team2);
@@ -82,7 +82,7 @@ const printGoals = function (...players: string[]): void {
   console.log(`${players.length} players were scored`);
 };
 printGoals("Davies", "Muller", "Lewandowski", "Kimmich");
-printGoals(...game.scored);
+printGoals(...game1.scored);
 
 // 7.
 console.log(team1 < team2 && `team1 wins with ${team1}`);

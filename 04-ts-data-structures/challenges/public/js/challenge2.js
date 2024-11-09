@@ -1,5 +1,5 @@
 "use strict";
-const game1 = {
+const game2 = {
     team1: "Bayern Munich",
     team2: "Borrussia Dortmund",
     players: [
@@ -40,30 +40,29 @@ const game1 = {
     },
 };
 // 1.
-const [players1, players2] = game1.players;
-console.log(players1);
-console.log(players2);
+const scoredEntries = game2.scored.entries();
+for (const [i, el] of scoredEntries) {
+    console.log(`Goal ${i + 1}: ${el}`);
+}
 // 2.
-const [gk, ...fieldPlayers] = players1;
-console.log(gk);
-console.log(fieldPlayers);
+const oddEntries = Object.values(game2.odds);
+console.log(oddEntries);
+let sum2 = 0;
+for (const value of oddEntries) {
+    sum2 += value;
+}
+console.log(sum2);
+console.log(sum2 / oddEntries.length);
 // 3.
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+for (const [team, odd] of Object.entries(game2.odds)) {
+    const teamStr = team === "x"
+        ? "draw"
+        : `victory ${team === "team1" ? game2.team1 : game2.team2}`;
+    console.log(`Odd of ${teamStr}: ${odd}`);
+}
 // 4.
-const players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
-console.log(players1Final);
-// 5.
-const { team1, x: draw, team2 } = game1.odds;
-console.log(team1);
-console.log(draw);
-console.log(team2);
-// 6.
-const printGoals = function (...players) {
-    console.log(`${players.length} players were scored`);
-};
-printGoals("Davies", "Muller", "Lewandowski", "Kimmich");
-printGoals(...game1.scored);
-// 7.
-console.log(team1 < team2 && `team1 wins with ${team1}`);
-console.log(team1 > team2 && `team2 wins with ${team2}`);
+const scorers = {};
+for (const player of game2.scored) {
+    scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+}
+console.log(scorers);
