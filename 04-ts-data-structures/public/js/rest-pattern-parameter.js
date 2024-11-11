@@ -1,15 +1,4 @@
 "use strict";
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 const restaurantRP = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
@@ -59,7 +48,7 @@ const [pizza, , risotto, ...otherFood] = [
 ];
 console.log(pizza, risotto, otherFood);
 // Objects
-const _a = restaurantRP.openingHours, { sat } = _a, weekDays = __rest(_a, ["sat"]);
+const { sat, ...weekDays } = restaurantRP.openingHours;
 console.log(weekDays);
 console.log(sat);
 // Functions

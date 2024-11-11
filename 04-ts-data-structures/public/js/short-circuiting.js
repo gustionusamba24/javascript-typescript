@@ -1,5 +1,4 @@
 "use strict";
-var _a;
 const restaurantSC = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
@@ -60,5 +59,5 @@ if (restaurantSC.orderPasta) {
 restaurantSC.orderPasta && restaurantSC.orderPasta("Flour", "Mushroom");
 // The Nullist Coalescing Operator (??)
 console.log("=============== NULLIST COALESCING (??) ===============");
-const guestCorrect = (_a = restaurantSC.numGuests) !== null && _a !== void 0 ? _a : 10;
+const guestCorrect = restaurantSC.numGuests ?? 10;
 console.log(guestCorrect);

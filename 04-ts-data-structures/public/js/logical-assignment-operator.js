@@ -1,5 +1,4 @@
 "use strict";
-var _a, _b;
 const restaurantLAO = {
     name: "Pizza Hut",
     location: "Jalan Kaliurang KM 5, Sleman, Yogyakarta",
@@ -49,10 +48,10 @@ const restaurant2 = {
 // restaurant1.numGuests ||= 10;
 // restaurant2.numGuests ||= 10;
 // Nullish Coalescing Operator
-(_a = restaurant1.numGuests) !== null && _a !== void 0 ? _a : (restaurant1.numGuests = 10);
-(_b = restaurant2.numGuests) !== null && _b !== void 0 ? _b : (restaurant2.numGuests = 10);
+restaurant1.numGuests ??= 10;
+restaurant2.numGuests ??= 10;
 // AND assignment operator
-restaurant1.owner && (restaurant1.owner = "Anonymous");
-restaurant2.owner && (restaurant2.owner = "Anonymous");
+restaurant1.owner &&= "Anonymous";
+restaurant2.owner &&= "Anonymous";
 console.log(restaurant1);
 console.log(restaurant2);

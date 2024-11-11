@@ -59,9 +59,13 @@ console.log(...str);
 // ];
 // console.log(...ingredients);
 // Objects
-const newRestaurant = Object.assign(Object.assign({ foundedIn: 1958 }, restaurantSO), { founder: "Frank Carney" });
+const newRestaurant = {
+    foundedIn: 1958,
+    ...restaurantSO,
+    founder: "Frank Carney",
+};
 console.log(newRestaurant);
-const restaurantCopy = Object.assign({}, restaurantSO);
+const restaurantCopy = { ...restaurantSO };
 restaurantCopy.name = "Pizza Hut Indonesia";
 console.log(restaurantSO.name);
 console.log(restaurantCopy.name);

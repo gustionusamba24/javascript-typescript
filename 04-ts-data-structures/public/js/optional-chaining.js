@@ -1,5 +1,4 @@
 "use strict";
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 // const daysOfWeekOC: string[] = [
 //   "mon",
 //   "tue",
@@ -56,17 +55,17 @@ const daysOfWeekOC = [
 ];
 for (const day of daysOfWeekOC) {
     console.log(day);
-    const open = (_b = (_a = restaurantOC.restaurantSchedule[day]) === null || _a === void 0 ? void 0 : _a.open) !== null && _b !== void 0 ? _b : "closed";
+    const open = restaurantOC.restaurantSchedule[day]?.open ?? "closed";
     console.log(`On ${day}, we open at ${open}`);
 }
 // Methods
-console.log((_d = (_c = restaurantOC.order) === null || _c === void 0 ? void 0 : _c.call(restaurantOC, 0, 1)) !== null && _d !== void 0 ? _d : "Method does not exist");
-console.log((_f = (_e = restaurantOC.orderRisotto) === null || _e === void 0 ? void 0 : _e.call(restaurantOC, 0, 1)) !== null && _f !== void 0 ? _f : "Method does not exist");
+console.log(restaurantOC.order?.(0, 1) ?? "Method does not exist");
+console.log(restaurantOC.orderRisotto?.(0, 1) ?? "Method does not exist");
 // Arrays
 const usersArray = [
     { name: "Balmond", email: "hello@balmond.com" },
 ];
-console.log((_h = (_g = usersArray[0]) === null || _g === void 0 ? void 0 : _g.name) !== null && _h !== void 0 ? _h : "User does not found");
-console.log((_j = restaurantOC.restaurantSchedule.mon) === null || _j === void 0 ? void 0 : _j.open);
-console.log((_l = (_k = restaurantOC.restaurantSchedule) === null || _k === void 0 ? void 0 : _k.mon) === null || _l === void 0 ? void 0 : _l.open);
+console.log(usersArray[0]?.name ?? "User does not found");
+console.log(restaurantOC.restaurantSchedule.mon?.open);
+console.log(restaurantOC.restaurantSchedule?.mon?.open);
 console.log(restaurantOC.restaurantSchedule.mon.open);
