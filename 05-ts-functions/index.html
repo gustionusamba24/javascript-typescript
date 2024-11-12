@@ -23,6 +23,7 @@
       div {
         height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         background: linear-gradient(
@@ -45,13 +46,42 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
+      button {
+        margin-top: 40px;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 18px;
+        font-weight: 500;
+        background: linear-gradient(
+          90deg,
+          rgba(239, 116, 92, 1) 0%,
+          rgba(52, 7, 61, 1) 100%
+        );
+        color: #fff;
+        cursor: pointer;
+      }
+
+      button:hover,
+      button:active {
+        background: linear-gradient(
+          90deg,
+          rgba(239, 116, 92, 0.85) 0%,
+          rgba(52, 7, 61, 0.85) 100%
+        );
+        color: rgba(255, 255, 255, 0.85);
+      }
     </style>
   </head>
   <body>
     <div>
       <h1>TS FUNCTIONS</h1>
+
+      <button class="answer">Answer Poll</button>
     </div>
 
-    <script src="public/js/function-return-function.js"></script>
+    <script src="public/js/challenge1.js"></script>
   </body>
 </html>
