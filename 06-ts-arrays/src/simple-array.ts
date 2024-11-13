@@ -1,9 +1,3 @@
-const currencies = new Map<string, string>([
-  ["USD", "United States Dollar"],
-  ["EUR", "Euro"],
-  ["GBP", "Pound sterling"],
-]);
-
 let arr = ["a", "b", "c", "d", "e"];
 
 // SLICE = doesn't mutate the original array

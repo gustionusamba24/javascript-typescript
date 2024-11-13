@@ -1,9 +1,4 @@
 "use strict";
-const currencies = new Map([
-    ["USD", "United States Dollar"],
-    ["EUR", "Euro"],
-    ["GBP", "Pound sterling"],
-]);
 let arr = ["a", "b", "c", "d", "e"];
 // SLICE = doesn't mutate the original array
 console.log("============ SLICE ============");

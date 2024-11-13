@@ -10,3 +10,20 @@ movements.forEach(function (mov, i, arr) {
 
 // the difference between forof and forEach is that we can't break out of a forEach loop. So break and continue do not work in a forEach loop
 // forEach always loop the entire array
+
+const currencies = new Map<string, string>([
+  ["USD", "United States Dollar"],
+  ["EUR", "Euro"],
+  ["GBP", "Pound sterling"],
+]);
+
+// forEach for Maps
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// forEach for Set
+const currenciesUnique = new Set<string>(["USD", "GBP", "USD", "EUR", "EUR"]);
+currenciesUnique.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
