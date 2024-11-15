@@ -64,7 +64,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 const displayMovements = function (movements: number[]): void {
   containerMovements!.innerHTML = " ";
-  movements.forEach(function (mov, i) {
+  movements.forEach(function (mov: number, i: number): void {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -80,8 +80,18 @@ const displayMovements = function (movements: number[]): void {
 };
 displayMovements(account2.movements);
 
+const displayBalance = function (movements: number[]): void {
+  const balance = movements.reduce(
+    (acc: number, cur: number): number => acc + cur,
+    0
+  );
+
+  labelBalance!.textContent = `${balance} €`;
+};
+displayBalance(account2.movements);
+
 const createUsername = function (accs: Account[]): void {
-  accs.forEach((acc: Account) => {
+  accs.forEach((acc: Account): void => {
     acc.username = acc.owner
       .toLowerCase()
       .split(" ")
