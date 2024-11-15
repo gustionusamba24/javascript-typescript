@@ -1,8 +1,9 @@
 type Account = {
   owner: string;
   movements: number[];
-  interestRate: number; // %
+  interestRate: number;
   pin: number;
+  username?: string;
 };
 
 const account1: Account = {
@@ -61,7 +62,7 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-const displayMovements = function (movements: number[]) {
+const displayMovements = function (movements: number[]): void {
   containerMovements!.innerHTML = " ";
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
@@ -78,3 +79,14 @@ const displayMovements = function (movements: number[]) {
   });
 };
 displayMovements(account2.movements);
+
+const createUsername = function (accs: Account[]): void {
+  accs.forEach((acc: Account) => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name: string): string => name[0])
+      .join("");
+  });
+};
+createUsername(accounts);
