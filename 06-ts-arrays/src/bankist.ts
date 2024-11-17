@@ -4,6 +4,7 @@ type Account = {
   interestRate: number;
   pin: number;
   username?: string;
+  balance?: number;
 };
 
 const account1: Account = {
@@ -54,13 +55,27 @@ const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
 
-const inputLoginUsername = document.querySelector(".login__input--user");
-const inputLoginPin = document.querySelector(".login__input--pin");
-const inputTransferTo = document.querySelector(".form__input--to");
-const inputTransferAmount = document.querySelector(".form__input--amount");
-const inputLoanAmount = document.querySelector(".form__input--loan-amount");
-const inputCloseUsername = document.querySelector(".form__input--user");
-const inputClosePin = document.querySelector(".form__input--pin");
+const inputLoginUsername: HTMLInputElement = document.querySelector(
+  ".login__input--user"
+) as HTMLInputElement;
+const inputLoginPin: HTMLInputElement = document.querySelector(
+  ".login__input--pin"
+) as HTMLInputElement;
+const inputTransferTo: HTMLInputElement = document.querySelector(
+  ".form__input--to"
+) as HTMLInputElement;
+const inputTransferAmount: HTMLInputElement = document.querySelector(
+  ".form__input--amount"
+) as HTMLInputElement;
+const inputLoanAmount: HTMLInputElement = document.querySelector(
+  ".form__input--loan-amount"
+) as HTMLInputElement;
+const inputCloseUsername: HTMLInputElement = document.querySelector(
+  ".form__input--user"
+) as HTMLInputElement;
+const inputClosePin: HTMLInputElement = document.querySelector(
+  ".form__input--pin"
+) as HTMLInputElement;
 
 const displayMovements = function (movements: number[]): void {
   containerMovements!.innerHTML = " ";
@@ -79,13 +94,13 @@ const displayMovements = function (movements: number[]): void {
   });
 };
 
-const calcDisplayBalance = function (movements: number[]): void {
-  const balance = movements.reduce(
+const calcDisplayBalance = function (acc: Account): void {
+  acc.balance = acc.movements.reduce(
     (acc: number, cur: number): number => acc + cur,
     0
   );
 
-  labelBalance!.textContent = `${balance}€`;
+  labelBalance!.textContent = `${acc.balance}€`;
 };
 
 const calcDisplaySummary = function (acc: Account): void {
@@ -118,15 +133,32 @@ const createUsername = function (accs: Account[]): void {
 };
 createUsername(accounts);
 
-let currentAccount;
+const updateUI = function (acc: Account): void {
+  // Display movements
+  displayMovements(acc.movements);
 
-btnLogin?.addEventListener("click", function (e) {
+  // Display balance
+  calcDisplayBalance(acc);
+
+  // Display summary
+  calcDisplaySummary(acc);
+};
+
+let currentAccount: Account;
+
+btnLogin?.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
-  currentAccount = accounts.find(
+  const foundAccount = accounts.find(
     (acc: Account): boolean =>
       acc.username === (inputLoginUsername as HTMLInputElement).value
   );
+
+  if (foundAccount) {
+    currentAccount = foundAccount;
+  } else {
+    console.error("Account not found");
+  }
 
   if (
     currentAccount?.pin === Number((inputLoginPin as HTMLInputElement).value)
@@ -138,18 +170,35 @@ btnLogin?.addEventListener("click", function (e) {
     (containerApp as HTMLElement).style.opacity = "100";
 
     // Clear the input field
-    (inputLoginUsername as HTMLInputElement).value = (
-      inputLoginPin as HTMLInputElement
-    ).value = "";
-    (inputLoginPin as HTMLElement).blur();
+    inputLoginUsername.value = inputLoginPin.value = "";
+    inputLoginPin.blur();
 
-    // Display movements
-    displayMovements(currentAccount.movements);
+    updateUI(currentAccount);
+  }
+});
 
-    // Display balance
-    calcDisplayBalance(currentAccount.movements);
+btnTransfer?.addEventListener("click", function (e: Event): void {
+  e.preventDefault();
 
-    // Display summary
-    calcDisplaySummary(currentAccount);
+  const amount = Number((inputTransferAmount as HTMLInputElement).value);
+  const receiverAcc = accounts.find(
+    (acc: Account): boolean =>
+      acc.username === (inputTransferTo as HTMLInputElement).value
+  );
+
+  inputTransferAmount.value = inputTransferTo.value = "";
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount?.balance! >= amount &&
+    receiverAcc?.username !== currentAccount?.username
+  ) {
+    // Doing transfer
+    currentAccount?.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // Update the UI
+    updateUI(currentAccount);
   }
 });

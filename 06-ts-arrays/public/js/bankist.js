@@ -60,9 +60,9 @@ const displayMovements = function (movements) {
         containerMovements === null || containerMovements === void 0 ? void 0 : containerMovements.insertAdjacentHTML("afterbegin", html);
     });
 };
-const calcDisplayBalance = function (movements) {
-    const balance = movements.reduce((acc, cur) => acc + cur, 0);
-    labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+    acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+    labelBalance.textContent = `${acc.balance}€`;
 };
 const calcDisplaySummary = function (acc) {
     const income = acc.movements
@@ -90,10 +90,24 @@ const createUsername = function (accs) {
     });
 };
 createUsername(accounts);
+const updateUI = function (acc) {
+    // Display movements
+    displayMovements(acc.movements);
+    // Display balance
+    calcDisplayBalance(acc);
+    // Display summary
+    calcDisplaySummary(acc);
+};
 let currentAccount;
 btnLogin === null || btnLogin === void 0 ? void 0 : btnLogin.addEventListener("click", function (e) {
     e.preventDefault();
-    currentAccount = accounts.find((acc) => acc.username === inputLoginUsername.value);
+    const foundAccount = accounts.find((acc) => acc.username === inputLoginUsername.value);
+    if (foundAccount) {
+        currentAccount = foundAccount;
+    }
+    else {
+        console.error("Account not found");
+    }
     if ((currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.pin) === Number(inputLoginPin.value)) {
         // Display UI and welcome message
         labelWelcome.textContent = `Welcome Back. ${currentAccount.owner.split(" ")[0]}`;
@@ -101,11 +115,22 @@ btnLogin === null || btnLogin === void 0 ? void 0 : btnLogin.addEventListener("c
         // Clear the input field
         inputLoginUsername.value = inputLoginPin.value = "";
         inputLoginPin.blur();
-        // Display movements
-        displayMovements(currentAccount.movements);
-        // Display balance
-        calcDisplayBalance(currentAccount.movements);
-        // Display summary
-        calcDisplaySummary(currentAccount);
+        updateUI(currentAccount);
+    }
+});
+btnTransfer === null || btnTransfer === void 0 ? void 0 : btnTransfer.addEventListener("click", function (e) {
+    e.preventDefault();
+    const amount = Number(inputTransferAmount.value);
+    const receiverAcc = accounts.find((acc) => acc.username === inputTransferTo.value);
+    inputTransferAmount.value = inputTransferTo.value = "";
+    if (amount > 0 &&
+        receiverAcc &&
+        (currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.balance) >= amount &&
+        (receiverAcc === null || receiverAcc === void 0 ? void 0 : receiverAcc.username) !== (currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.username)) {
+        // Doing transfer
+        currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.movements.push(-amount);
+        receiverAcc.movements.push(amount);
+        // Update the UI
+        updateUI(currentAccount);
     }
 });
