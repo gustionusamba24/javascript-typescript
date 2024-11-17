@@ -78,7 +78,6 @@ const displayMovements = function (movements: number[]): void {
     containerMovements?.insertAdjacentHTML("afterbegin", html);
   });
 };
-displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements: number[]): void {
   const balance = movements.reduce(
@@ -88,27 +87,25 @@ const calcDisplayBalance = function (movements: number[]): void {
 
   labelBalance!.textContent = `${balance}€`;
 };
-calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = function (movements: number[]): void {
-  const income = movements
+const calcDisplaySummary = function (acc: Account): void {
+  const income = acc.movements
     .filter((mov: number): boolean => mov > 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
   labelSumIn!.textContent = `${income}€`;
 
-  const outcome = movements
+  const outcome = acc.movements
     .filter((mov: number): boolean => mov < 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
   labelSumOut!.textContent = `${Math.abs(outcome)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov: number): boolean => mov > 0)
-    .map((deposit: number): number => (deposit * 1.2) / 100)
+    .map((deposit: number): number => (deposit * acc.interestRate) / 100)
     .filter((int: number): boolean => int > 1)
     .reduce((acc: number, int: number): number => acc + int, 0);
   labelSumInterest!.textContent = `${interest}€`;
 };
-calcDisplaySummary(account1.movements);
 
 const createUsername = function (accs: Account[]): void {
   accs.forEach((acc: Account): void => {
@@ -120,3 +117,39 @@ const createUsername = function (accs: Account[]): void {
   });
 };
 createUsername(accounts);
+
+let currentAccount;
+
+btnLogin?.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc: Account): boolean =>
+      acc.username === (inputLoginUsername as HTMLInputElement).value
+  );
+
+  if (
+    currentAccount?.pin === Number((inputLoginPin as HTMLInputElement).value)
+  ) {
+    // Display UI and welcome message
+    labelWelcome!.textContent = `Welcome Back. ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    (containerApp as HTMLElement).style.opacity = "100";
+
+    // Clear the input field
+    (inputLoginUsername as HTMLInputElement).value = (
+      inputLoginPin as HTMLInputElement
+    ).value = "";
+    (inputLoginPin as HTMLElement).blur();
+
+    // Display movements
+    displayMovements(currentAccount.movements);
+
+    // Display balance
+    calcDisplayBalance(currentAccount.movements);
+
+    // Display summary
+    calcDisplaySummary(currentAccount);
+  }
+});
