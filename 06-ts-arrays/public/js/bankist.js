@@ -102,15 +102,10 @@ let currentAccount;
 btnLogin === null || btnLogin === void 0 ? void 0 : btnLogin.addEventListener("click", function (e) {
     e.preventDefault();
     const foundAccount = accounts.find((acc) => acc.username === inputLoginUsername.value);
-    if (foundAccount) {
+    if ((foundAccount === null || foundAccount === void 0 ? void 0 : foundAccount.pin) === Number(inputLoginPin.value)) {
         currentAccount = foundAccount;
-    }
-    else {
-        console.error("Account not found");
-    }
-    if ((currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.pin) === Number(inputLoginPin.value)) {
         // Display UI and welcome message
-        labelWelcome.textContent = `Welcome Back. ${currentAccount.owner.split(" ")[0]}`;
+        labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(" ")[0]}`;
         containerApp.style.opacity = "100";
         // Clear the input field
         inputLoginUsername.value = inputLoginPin.value = "";
@@ -133,4 +128,16 @@ btnTransfer === null || btnTransfer === void 0 ? void 0 : btnTransfer.addEventLi
         // Update the UI
         updateUI(currentAccount);
     }
+});
+btnClose === null || btnClose === void 0 ? void 0 : btnClose.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (inputCloseUsername.value === currentAccount.username &&
+        Number(inputClosePin.value) === currentAccount.pin) {
+        const index = accounts.findIndex((acc) => acc.username === currentAccount.username);
+        // Delete the account
+        accounts.splice(index, 1);
+        // Hide UI
+        containerApp.style.opacity = "0";
+    }
+    inputCloseUsername.value = inputClosePin.value = "";
 });

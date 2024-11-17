@@ -46,8 +46,10 @@ const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTime = document.querySelector(".timer");
 
-const containerApp = document.querySelector(".app");
-const containerMovements = document.querySelector(".movements");
+const containerApp: HTMLElement = document.querySelector(".app") as HTMLElement;
+const containerMovements: HTMLElement = document.querySelector(
+  ".movements"
+) as HTMLElement;
 
 const btnLogin = document.querySelector(".login__btn");
 const btnTransfer = document.querySelector(".form__btn--transfer");
@@ -150,24 +152,16 @@ btnLogin?.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
   const foundAccount = accounts.find(
-    (acc: Account): boolean =>
-      acc.username === (inputLoginUsername as HTMLInputElement).value
+    (acc: Account): boolean => acc.username === inputLoginUsername.value
   );
 
-  if (foundAccount) {
+  if (foundAccount?.pin === Number(inputLoginPin.value)) {
     currentAccount = foundAccount;
-  } else {
-    console.error("Account not found");
-  }
-
-  if (
-    currentAccount?.pin === Number((inputLoginPin as HTMLInputElement).value)
-  ) {
     // Display UI and welcome message
-    labelWelcome!.textContent = `Welcome Back. ${
+    labelWelcome!.textContent = `Welcome back, ${
       currentAccount.owner.split(" ")[0]
     }`;
-    (containerApp as HTMLElement).style.opacity = "100";
+    containerApp.style.opacity = "100";
 
     // Clear the input field
     inputLoginUsername.value = inputLoginPin.value = "";
@@ -180,10 +174,9 @@ btnLogin?.addEventListener("click", function (e: Event): void {
 btnTransfer?.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
-  const amount = Number((inputTransferAmount as HTMLInputElement).value);
+  const amount = Number(inputTransferAmount.value);
   const receiverAcc = accounts.find(
-    (acc: Account): boolean =>
-      acc.username === (inputTransferTo as HTMLInputElement).value
+    (acc: Account): boolean => acc.username === inputTransferTo.value
   );
 
   inputTransferAmount.value = inputTransferTo.value = "";
@@ -201,4 +194,24 @@ btnTransfer?.addEventListener("click", function (e: Event): void {
     // Update the UI
     updateUI(currentAccount);
   }
+});
+
+btnClose?.addEventListener("click", function (e: Event): void {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc: Account): boolean => acc.username === currentAccount.username
+    );
+
+    // Delete the account
+    accounts.splice(index, 1);
+
+    // Hide UI
+    containerApp.style.opacity = "0";
+  }
+  inputCloseUsername.value = inputClosePin.value = "";
 });
