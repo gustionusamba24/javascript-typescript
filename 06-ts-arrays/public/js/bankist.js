@@ -120,14 +120,26 @@ btnTransfer === null || btnTransfer === void 0 ? void 0 : btnTransfer.addEventLi
     inputTransferAmount.value = inputTransferTo.value = "";
     if (amount > 0 &&
         receiverAcc &&
-        (currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.balance) >= amount &&
-        (receiverAcc === null || receiverAcc === void 0 ? void 0 : receiverAcc.username) !== (currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.username)) {
+        currentAccount.balance >= amount &&
+        receiverAcc.username !== (currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.username)) {
         // Doing transfer
-        currentAccount === null || currentAccount === void 0 ? void 0 : currentAccount.movements.push(-amount);
+        currentAccount.movements.push(-amount);
         receiverAcc.movements.push(amount);
         // Update the UI
         updateUI(currentAccount);
     }
+});
+btnLoan === null || btnLoan === void 0 ? void 0 : btnLoan.addEventListener("click", function (e) {
+    e.preventDefault();
+    const amount = Number(inputLoanAmount.value);
+    if (amount > 0 &&
+        currentAccount.movements.some((mov) => mov >= amount * 0.1)) {
+        // Add the movement
+        currentAccount.movements.push(amount);
+        // Update the UI
+        updateUI(currentAccount);
+    }
+    inputLoanAmount.value = "";
 });
 btnClose === null || btnClose === void 0 ? void 0 : btnClose.addEventListener("click", function (e) {
     e.preventDefault();
@@ -136,7 +148,7 @@ btnClose === null || btnClose === void 0 ? void 0 : btnClose.addEventListener("c
         const index = accounts.findIndex((acc) => acc.username === currentAccount.username);
         // Delete the account
         accounts.splice(index, 1);
-        // Hide UI
+        // Hide the UI
         containerApp.style.opacity = "0";
     }
     inputCloseUsername.value = inputClosePin.value = "";

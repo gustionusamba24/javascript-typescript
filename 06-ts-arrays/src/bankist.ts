@@ -184,16 +184,34 @@ btnTransfer?.addEventListener("click", function (e: Event): void {
   if (
     amount > 0 &&
     receiverAcc &&
-    currentAccount?.balance! >= amount &&
-    receiverAcc?.username !== currentAccount?.username
+    currentAccount.balance! >= amount &&
+    receiverAcc.username !== currentAccount?.username
   ) {
     // Doing transfer
-    currentAccount?.movements.push(-amount);
+    currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
     // Update the UI
     updateUI(currentAccount);
   }
+});
+
+btnLoan?.addEventListener("click", function (e: Event): void {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (
+    amount > 0 &&
+    currentAccount.movements.some((mov: number): boolean => mov >= amount * 0.1)
+  ) {
+    // Add the movement
+    currentAccount.movements.push(amount);
+
+    // Update the UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = "";
 });
 
 btnClose?.addEventListener("click", function (e: Event): void {
@@ -210,7 +228,7 @@ btnClose?.addEventListener("click", function (e: Event): void {
     // Delete the account
     accounts.splice(index, 1);
 
-    // Hide UI
+    // Hide the UI
     containerApp.style.opacity = "0";
   }
   inputCloseUsername.value = inputClosePin.value = "";
