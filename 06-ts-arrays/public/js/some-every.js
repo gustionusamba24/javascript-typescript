@@ -6,3 +6,5 @@ console.log(movements6.includes(-400));
 // some checks for a condition
 const anyDeposits = movements6.some((mov) => mov > 1500);
 console.log(anyDeposits);
+// every checks for all elements to satisfy a condition
+console.log(movements6.every((mov) => mov > 0));
