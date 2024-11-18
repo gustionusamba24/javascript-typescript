@@ -79,9 +79,18 @@ const inputClosePin: HTMLInputElement = document.querySelector(
   ".form__input--pin"
 ) as HTMLInputElement;
 
-const displayMovements = function (movements: number[]): void {
+const displayMovements = function (
+  movements: number[],
+  sort: boolean = false
+): void {
   containerMovements!.innerHTML = " ";
-  movements.forEach(function (mov: number, i: number): void {
+
+  // We use slice to create a shallow copy of the array
+  const movs = sort
+    ? movements.slice().sort((a: number, b: number): number => a - b)
+    : movements;
+
+  movs.forEach(function (mov: number, i: number): void {
     const type = mov > 0 ? "deposit" : "withdrawal";
 
     const html = `
@@ -232,4 +241,13 @@ btnClose?.addEventListener("click", function (e: Event): void {
     containerApp.style.opacity = "0";
   }
   inputCloseUsername.value = inputClosePin.value = "";
+});
+
+let sorted = false;
+
+btnSort?.addEventListener("click", function (e: Event): void {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
