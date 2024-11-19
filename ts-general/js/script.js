@@ -11,8 +11,10 @@ const menu = [
 const orderQueue = [];
 // Challenge: Add a utility function "addNewPizza" that takes a pizza object and adds it to the menu
 const addNewPizza = function (pizzaObj) {
-    pizzaObj.id = nextPizzaId++;
-    menu.push(pizzaObj);
+    const pizza = Object.assign({ id: nextPizzaId++ }, pizzaObj);
+    menu.push(pizza);
+    // pizzaObj.id = nextPizzaId++;
+    // menu.push(pizzaObj);
 };
 addNewPizza({ name: "BBQ Chicken", price: 12 });
 addNewPizza({ name: "Meat Feast", price: 20 });
