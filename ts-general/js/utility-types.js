@@ -1,9 +1,10 @@
 "use strict";
+let nextUserId = 1;
 const users = [
-    { id: 1, username: "balmond_firman", role: "member" },
-    { id: 2, username: "alucard_janaka", role: "contributor" },
-    { id: 3, username: "alice_mutia", role: "admin" },
-    { id: 4, username: "miya_milaika", role: "member" },
+    { id: nextUserId++, username: "balmond_firman", role: "member" },
+    { id: nextUserId++, username: "alucard_janaka", role: "contributor" },
+    { id: nextUserId++, username: "alice_mutia", role: "admin" },
+    { id: nextUserId++, username: "miya_milaika", role: "member" },
 ];
 function updateUser(id, updates) {
     const foundUser = users.find((user) => user.id === id);
@@ -13,6 +14,12 @@ function updateUser(id, updates) {
     }
     Object.assign(foundUser, updates);
 }
-updateUser(1, { username: "balmond_firmansyah" });
-updateUser(4, { username: "miya_khalifa" });
+function addNewUser(newUser) {
+    const user = Object.assign({ id: nextUserId++ }, newUser);
+    users.push(user);
+    return user;
+}
+// updateUser(1, { username: "balmond_firmansyah" });
+// updateUser(4, { username: "miya_khalifa" });
+addNewUser({ username: "terizla_anwar", role: "admin" });
 console.log(users);
