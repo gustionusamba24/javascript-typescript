@@ -10,7 +10,7 @@ const voters = [
   { name: "Clint", age: 27 },
 ];
 
-function getLastItem<PlaceholderType>(array: PlaceholderType[]) {
+function getLastItem<Type>(array: Type[]): Type | undefined {
   return array[array.length - 1];
 }
 

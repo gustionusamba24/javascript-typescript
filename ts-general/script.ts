@@ -84,6 +84,23 @@ const getPizzaDetail = function (
   }
 };
 
+function addToArray<T>(array: T[], item: T): T[] {
+  array.push(item);
+  return array;
+}
+
+// example usage
+addToArray<Pizza>(menu, {
+  id: nextPizzaId++,
+  name: "Chicken Bacon Ranch",
+  price: 18,
+});
+addToArray<Order>(orderQueue, {
+  id: nextOrderId++,
+  pizza: menu[2],
+  status: "completed",
+});
+
 placeOrder("Margherita");
 placeOrder("Veggie");
 placeOrder("Meat Feast");

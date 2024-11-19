@@ -54,6 +54,21 @@ const getPizzaDetail = function (identifier) {
         throw new TypeError("Parameter `identifier` must be either a string or a number");
     }
 };
+function addToArray(array, item) {
+    array.push(item);
+    return array;
+}
+// example usage
+addToArray(menu, {
+    id: nextPizzaId++,
+    name: "Chicken Bacon Ranch",
+    price: 18,
+});
+addToArray(orderQueue, {
+    id: nextOrderId++,
+    pizza: menu[2],
+    status: "completed",
+});
 placeOrder("Margherita");
 placeOrder("Veggie");
 placeOrder("Meat Feast");
