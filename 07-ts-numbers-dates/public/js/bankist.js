@@ -125,7 +125,7 @@ btnLogin.addEventListener("click", function (e) {
         console.error("Account not found");
         return;
     }
-    if (foundAccount.pin === Number(inputLoginPin.value)) {
+    if (foundAccount.pin === +inputLoginPin.value) {
         currentAccount = foundAccount;
         // Display UI and welcome message
         if (labelWelcome) {
@@ -138,9 +138,9 @@ btnLogin.addEventListener("click", function (e) {
         updateUI(currentAccount);
     }
 });
-btnTransfer === null || btnTransfer === void 0 ? void 0 : btnTransfer.addEventListener("click", function (e) {
+btnTransfer.addEventListener("click", function (e) {
     e.preventDefault();
-    const amount = Number(inputTransferAmount.value);
+    const amount = +inputTransferAmount.value;
     const receiverAcc = accounts.find((acc) => acc.username === inputTransferTo.value);
     inputTransferAmount.value = inputTransferTo.value = "";
     if (amount > 0 &&
@@ -156,7 +156,7 @@ btnTransfer === null || btnTransfer === void 0 ? void 0 : btnTransfer.addEventLi
 });
 btnLoan.addEventListener("click", function (e) {
     e.preventDefault();
-    const amount = Number(inputLoanAmount.value);
+    const amount = +inputLoanAmount.value;
     if (amount > 0 &&
         currentAccount.movements.some((mov) => mov >= amount * 0.1)) {
         // Add the movement
@@ -169,7 +169,7 @@ btnLoan.addEventListener("click", function (e) {
 btnClose.addEventListener("click", function (e) {
     e.preventDefault();
     if (inputCloseUsername.value === currentAccount.username &&
-        Number(inputClosePin.value) === currentAccount.pin) {
+        +inputClosePin.value === currentAccount.pin) {
         const index = accounts.findIndex((acc) => acc.username === currentAccount.username);
         // Delete the account
         accounts.splice(index, 1);

@@ -194,7 +194,7 @@ btnLogin.addEventListener("click", function (e: Event): void {
     return;
   }
 
-  if (foundAccount.pin === Number(inputLoginPin.value)) {
+  if (foundAccount.pin === +inputLoginPin.value) {
     currentAccount = foundAccount;
     // Display UI and welcome message
     if (labelWelcome) {
@@ -213,10 +213,10 @@ btnLogin.addEventListener("click", function (e: Event): void {
   }
 });
 
-btnTransfer?.addEventListener("click", function (e: Event): void {
+btnTransfer.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     (acc: Account): boolean => acc.username === inputTransferTo.value
   );
@@ -241,7 +241,7 @@ btnTransfer?.addEventListener("click", function (e: Event): void {
 btnLoan.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
 
   if (
     amount > 0 &&
@@ -261,7 +261,7 @@ btnClose.addEventListener("click", function (e: Event): void {
 
   if (
     inputCloseUsername.value === currentAccount.username &&
-    Number(inputClosePin.value) === currentAccount.pin
+    +inputClosePin.value === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       (acc: Account): boolean => acc.username === currentAccount.username
