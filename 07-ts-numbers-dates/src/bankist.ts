@@ -119,7 +119,7 @@ const displayMovements = function (
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}
           </div>
-          <div class="movements__value">${mov}€</div>
+          <div class="movements__value">${mov.toFixed(2)}€</div>
         </div>
       `;
 
@@ -133,7 +133,7 @@ const calcDisplayBalance = function (acc: Account): void {
     0
   );
 
-  if (labelBalance) labelBalance.textContent = `${acc.balance}€`;
+  if (labelBalance) labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc: Account): void {
@@ -141,13 +141,13 @@ const calcDisplaySummary = function (acc: Account): void {
     .filter((mov: number): boolean => mov > 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
 
-  if (labelSumIn) labelSumIn.textContent = `${income}€`;
+  if (labelSumIn) labelSumIn.textContent = `${income.toFixed(2)}€`;
 
   const outcome = acc.movements
     .filter((mov: number): boolean => mov < 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
 
-  if (labelSumOut) labelSumOut.textContent = `${Math.abs(outcome)}€`;
+  if (labelSumOut) labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter((mov: number): boolean => mov > 0)
@@ -155,7 +155,8 @@ const calcDisplaySummary = function (acc: Account): void {
     .filter((int: number): boolean => int > 1)
     .reduce((acc: number, int: number): number => acc + int, 0);
 
-  if (labelSumInterest) labelSumInterest.textContent = `${interest}€`;
+  if (labelSumInterest)
+    labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsername = function (accs: Account[]): void {
@@ -241,7 +242,7 @@ btnTransfer.addEventListener("click", function (e: Event): void {
 btnLoan.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(+inputLoanAmount.value);
 
   if (
     amount > 0 &&
