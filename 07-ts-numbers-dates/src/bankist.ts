@@ -5,57 +5,79 @@ type Account = {
   pin: number;
   username?: string;
   balance?: number;
+  movementsDates: string[];
+  currency: string;
+  locale: string;
 };
 
 const account1: Account = {
   owner: "Jonas Schmedtmann",
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2,
   pin: 1111,
+  movementsDates: [
+    "2019-11-18T21:31:17.178Z",
+    "2019-12-23T07:42:02.383Z",
+    "2020-01-28T09:15:04.904Z",
+    "2020-04-01T10:17:24.185Z",
+    "2020-05-08T14:11:59.604Z",
+    "2020-05-27T17:01:17.194Z",
+    "2020-07-11T23:36:17.929Z",
+    "2020-07-12T10:51:36.790Z",
+  ],
+  currency: "EUR",
+  locale: "pt-PT", // de-DE
 };
 
-const account2 = {
+const account2: Account = {
   owner: "Jessica Davis",
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
+  movementsDates: [
+    "2019-11-01T13:15:33.035Z",
+    "2019-11-30T09:48:16.867Z",
+    "2019-12-25T06:04:23.907Z",
+    "2020-01-25T14:18:46.235Z",
+    "2020-02-05T16:33:06.386Z",
+    "2020-04-10T14:43:26.374Z",
+    "2020-06-25T18:49:59.371Z",
+    "2020-07-26T12:01:20.894Z",
+  ],
+  currency: "USD",
+  locale: "en-US",
 };
 
-const account3 = {
-  owner: "Steven Thomas Williams",
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
-};
+const accounts: Account[] = [account1, account2];
 
-const account4 = {
-  owner: "Sarah Smith",
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
-};
-
-const accounts: Account[] = [account1, account2, account3, account4];
-
-// Element
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
 const labelBalance = document.querySelector(".balance__value");
 const labelSumIn = document.querySelector(".summary__value--in");
 const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
-const labelTime = document.querySelector(".timer");
+const labelTimer = document.querySelector(".timer");
 
 const containerApp: HTMLElement = document.querySelector(".app") as HTMLElement;
 const containerMovements: HTMLElement = document.querySelector(
   ".movements"
 ) as HTMLElement;
 
-const btnLogin = document.querySelector(".login__btn");
-const btnTransfer = document.querySelector(".form__btn--transfer");
-const btnLoan = document.querySelector(".form__btn--loan");
-const btnClose = document.querySelector(".form__btn--close");
-const btnSort = document.querySelector(".btn--sort");
+const btnLogin: HTMLButtonElement = document.querySelector(
+  ".login__btn"
+) as HTMLButtonElement;
+const btnTransfer: HTMLButtonElement = document.querySelector(
+  ".form__btn--transfer"
+) as HTMLButtonElement;
+const btnLoan: HTMLButtonElement = document.querySelector(
+  ".form__btn--loan"
+) as HTMLButtonElement;
+const btnClose: HTMLButtonElement = document.querySelector(
+  ".form__btn--close"
+) as HTMLButtonElement;
+const btnSort: HTMLButtonElement = document.querySelector(
+  ".btn--sort"
+) as HTMLButtonElement;
 
 const inputLoginUsername: HTMLInputElement = document.querySelector(
   ".login__input--user"
@@ -83,7 +105,7 @@ const displayMovements = function (
   movements: number[],
   sort: boolean = false
 ): void {
-  containerMovements!.innerHTML = " ";
+  containerMovements.innerHTML = " ";
 
   // We use slice to create a shallow copy of the array
   const movs = sort
@@ -101,7 +123,7 @@ const displayMovements = function (
         </div>
       `;
 
-    containerMovements?.insertAdjacentHTML("afterbegin", html);
+    containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
 
@@ -111,26 +133,29 @@ const calcDisplayBalance = function (acc: Account): void {
     0
   );
 
-  labelBalance!.textContent = `${acc.balance}€`;
+  if (labelBalance) labelBalance.textContent = `${acc.balance}€`;
 };
 
 const calcDisplaySummary = function (acc: Account): void {
   const income = acc.movements
     .filter((mov: number): boolean => mov > 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
-  labelSumIn!.textContent = `${income}€`;
+
+  if (labelSumIn) labelSumIn.textContent = `${income}€`;
 
   const outcome = acc.movements
     .filter((mov: number): boolean => mov < 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
-  labelSumOut!.textContent = `${Math.abs(outcome)}€`;
+
+  if (labelSumOut) labelSumOut.textContent = `${Math.abs(outcome)}€`;
 
   const interest = acc.movements
     .filter((mov: number): boolean => mov > 0)
     .map((deposit: number): number => (deposit * acc.interestRate) / 100)
     .filter((int: number): boolean => int > 1)
     .reduce((acc: number, int: number): number => acc + int, 0);
-  labelSumInterest!.textContent = `${interest}€`;
+
+  if (labelSumInterest) labelSumInterest.textContent = `${interest}€`;
 };
 
 const createUsername = function (accs: Account[]): void {
@@ -157,19 +182,27 @@ const updateUI = function (acc: Account): void {
 
 let currentAccount: Account;
 
-btnLogin?.addEventListener("click", function (e: Event): void {
+btnLogin.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
   const foundAccount = accounts.find(
     (acc: Account): boolean => acc.username === inputLoginUsername.value
   );
 
-  if (foundAccount?.pin === Number(inputLoginPin.value)) {
+  if (!foundAccount) {
+    console.error("Account not found");
+    return;
+  }
+
+  if (foundAccount.pin === Number(inputLoginPin.value)) {
     currentAccount = foundAccount;
     // Display UI and welcome message
-    labelWelcome!.textContent = `Welcome back, ${
-      currentAccount.owner.split(" ")[0]
-    }`;
+    if (labelWelcome) {
+      labelWelcome.textContent = `Welcome back, ${
+        currentAccount.owner.split(" ")[0]
+      }`;
+    }
+
     containerApp.style.opacity = "100";
 
     // Clear the input field
@@ -205,7 +238,7 @@ btnTransfer?.addEventListener("click", function (e: Event): void {
   }
 });
 
-btnLoan?.addEventListener("click", function (e: Event): void {
+btnLoan.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
   const amount = Number(inputLoanAmount.value);
@@ -223,7 +256,7 @@ btnLoan?.addEventListener("click", function (e: Event): void {
   inputLoanAmount.value = "";
 });
 
-btnClose?.addEventListener("click", function (e: Event): void {
+btnClose.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
   if (
@@ -245,7 +278,7 @@ btnClose?.addEventListener("click", function (e: Event): void {
 
 let sorted = false;
 
-btnSort?.addEventListener("click", function (e: Event): void {
+btnSort.addEventListener("click", function (e: Event): void {
   e.preventDefault();
 
   displayMovements(currentAccount.movements, !sorted);
