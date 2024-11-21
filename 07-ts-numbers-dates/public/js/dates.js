@@ -1,6 +1,6 @@
 "use strict";
-const now = new Date();
-console.log(now);
+const now2 = new Date();
+console.log(now2);
 console.log(new Date("Aug 02 2020 18:05:41"));
 console.log(new Date("December 24, 2015"));
 console.log(new Date(2024, 10, 19, 19, 0, 5));
@@ -22,6 +22,6 @@ console.log(future.getSeconds());
 console.log(future.toISOString()); // 2024-11-19T19:00:00.000Z
 console.log(future.getTime());
 console.log(new Date(1732017600000)); // 2024-11-19T19:00:00.000Z
-console.log(Date.now());
+console.log(Date.now2());
 future.setFullYear(2040);
 console.log(future);
