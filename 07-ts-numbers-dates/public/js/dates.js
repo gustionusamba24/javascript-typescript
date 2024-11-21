@@ -10,18 +10,18 @@ console.log(new Date(0));
 console.log(new Date(3 * 24 * 60 * 60 * 1000));
 // Working with dates
 console.log("=============== NEW ===============");
-const future = new Date(2024, 10, 19, 19, 22);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDate());
-console.log(future.getDay()); // the day of the week (zero based started from Sunday)
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.toISOString()); // 2024-11-19T19:00:00.000Z
-console.log(future.getTime());
+const future2 = new Date(2024, 10, 19, 19, 22);
+console.log(future2);
+console.log(future2.getFullYear());
+console.log(future2.getMonth());
+console.log(future2.getDate());
+console.log(future2.getDay()); // the day of the week (zero based started from Sunday)
+console.log(future2.getHours());
+console.log(future2.getMinutes());
+console.log(future2.getSeconds());
+console.log(future2.toISOString()); // 2024-11-19T19:00:00.000Z
+console.log(future2.getTime());
 console.log(new Date(1732017600000)); // 2024-11-19T19:00:00.000Z
 console.log(Date.now2());
-future.setFullYear(2040);
-console.log(future);
+future2.setFullYear(2040);
+console.log(future2);
