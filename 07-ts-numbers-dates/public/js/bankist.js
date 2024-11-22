@@ -1,6 +1,6 @@
 "use strict";
 const account1 = {
-    owner: "Jonas Schmedtmann",
+    owner: "Ruby Jane",
     movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
     interestRate: 1.2,
     pin: 1111,
@@ -14,8 +14,8 @@ const account1 = {
         "2024-11-19T23:36:17.929Z",
         "2024-11-20T10:51:36.790Z",
     ],
-    currency: "EUR",
-    locale: "pt-PT", // de-DE
+    currency: "IDR",
+    locale: "id-ID", // de-DE
 };
 const account2 = {
     owner: "Jessica Davis",
@@ -57,22 +57,16 @@ const inputTransferAmount = document.querySelector(".form__input--amount");
 const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
     const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
     const daysPassed = calcDaysPassed(new Date(), date);
-    console.log(daysPassed);
     if (daysPassed === 0)
         return "Today";
     if (daysPassed === 1)
         return "Yesterday";
     if (daysPassed <= 7)
         return `${daysPassed} days ago`;
-    else {
-        const day = `${date.getDate()}`.padStart(2, "0");
-        const month = `${date.getMonth() + 1}`.padStart(2, "0");
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
+    return new Intl.DateTimeFormat(locale).format(date);
 };
 const displayMovements = function (acc, sort = false) {
     containerMovements.innerHTML = " ";
@@ -83,7 +77,7 @@ const displayMovements = function (acc, sort = false) {
     movs.forEach(function (mov, i) {
         const type = mov > 0 ? "deposit" : "withdrawal";
         const date = new Date(acc.movementsDates[i]);
-        const displayDate = formatMovementDate(date);
+        const displayDate = formatMovementDate(date, acc.locale);
         const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}
@@ -158,13 +152,15 @@ btnLogin.addEventListener("click", function (e) {
         containerApp.style.opacity = "100";
         // Current date and time
         const now = new Date();
-        const day = `${now.getDate()}`.padStart(2, "0");
-        const month = `${now.getMonth() + 1}`.padStart(2, "0");
-        const year = now.getFullYear();
-        const hours = `${now.getHours()}`.padStart(2, "0");
-        const minutes = `${now.getMinutes()}`.padStart(2, "0");
         if (labelDate)
-            labelDate.textContent = `${day}-${month}-${year}, ${hours}:${minutes}`;
+            labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, {
+                hour: "numeric",
+                minute: "numeric",
+                day: "numeric",
+                month: "numeric",
+                year: "numeric",
+                weekday: "short",
+            }).format(now);
         // Clear the input field
         inputLoginUsername.value = inputLoginPin.value = "";
         inputLoginPin.blur();
