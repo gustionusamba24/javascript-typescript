@@ -113,6 +113,16 @@ const formatMovementDate = function (date: Date, locale: string) {
 
   return new Intl.DateTimeFormat(locale).format(date);
 };
+const formatCur = function (
+  value: number,
+  locale: string,
+  currency: string
+): string {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+  }).format(value);
+};
 
 const displayMovements = function (acc: Account, sort: boolean = false): void {
   containerMovements.innerHTML = " ";
@@ -128,12 +138,14 @@ const displayMovements = function (acc: Account, sort: boolean = false): void {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
+
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}
           </div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${formattedMov}</div>
         </div>
       `;
 
@@ -147,7 +159,9 @@ const calcDisplayBalance = function (acc: Account): void {
     0
   );
 
-  if (labelBalance) labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  const formattedBalance = formatCur(acc.balance, acc.locale, acc.currency);
+
+  if (labelBalance) labelBalance.textContent = `${formattedBalance}`;
 };
 
 const calcDisplaySummary = function (acc: Account): void {
@@ -155,13 +169,21 @@ const calcDisplaySummary = function (acc: Account): void {
     .filter((mov: number): boolean => mov > 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
 
-  if (labelSumIn) labelSumIn.textContent = `${income.toFixed(2)}€`;
+  const formattedIncome = formatCur(income, acc.locale, acc.currency);
+
+  if (labelSumIn) labelSumIn.textContent = `${formattedIncome}`;
 
   const outcome = acc.movements
     .filter((mov: number): boolean => mov < 0)
     .reduce((acc: number, mov: number): number => acc + mov, 0);
 
-  if (labelSumOut) labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
+  const formattedOutcome = formatCur(
+    Math.abs(outcome),
+    acc.locale,
+    acc.currency
+  );
+
+  if (labelSumOut) labelSumOut.textContent = `${formattedOutcome}`;
 
   const interest = acc.movements
     .filter((mov: number): boolean => mov > 0)
@@ -169,8 +191,9 @@ const calcDisplaySummary = function (acc: Account): void {
     .filter((int: number): boolean => int > 1)
     .reduce((acc: number, int: number): number => acc + int, 0);
 
-  if (labelSumInterest)
-    labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  const formattedInterest = formatCur(interest, acc.locale, acc.currency);
+
+  if (labelSumInterest) labelSumInterest.textContent = `${formattedInterest}`;
 };
 
 const createUsername = function (accs: Account[]): void {

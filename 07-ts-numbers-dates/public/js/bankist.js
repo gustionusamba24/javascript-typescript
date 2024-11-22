@@ -68,6 +68,12 @@ const formatMovementDate = function (date, locale) {
         return `${daysPassed} days ago`;
     return new Intl.DateTimeFormat(locale).format(date);
 };
+const formatCur = function (value, locale, currency) {
+    return new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: currency,
+    }).format(value);
+};
 const displayMovements = function (acc, sort = false) {
     containerMovements.innerHTML = " ";
     // We use slice to create a shallow copy of the array
@@ -78,12 +84,13 @@ const displayMovements = function (acc, sort = false) {
         const type = mov > 0 ? "deposit" : "withdrawal";
         const date = new Date(acc.movementsDates[i]);
         const displayDate = formatMovementDate(date, acc.locale);
+        const formattedMov = formatCur(mov, acc.locale, acc.currency);
         const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}
           </div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${formattedMov}</div>
         </div>
       `;
         containerMovements.insertAdjacentHTML("afterbegin", html);
@@ -91,27 +98,31 @@ const displayMovements = function (acc, sort = false) {
 };
 const calcDisplayBalance = function (acc) {
     acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+    const formattedBalance = formatCur(acc.balance, acc.locale, acc.currency);
     if (labelBalance)
-        labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+        labelBalance.textContent = `${formattedBalance}`;
 };
 const calcDisplaySummary = function (acc) {
     const income = acc.movements
         .filter((mov) => mov > 0)
         .reduce((acc, mov) => acc + mov, 0);
+    const formattedIncome = formatCur(income, acc.locale, acc.currency);
     if (labelSumIn)
-        labelSumIn.textContent = `${income.toFixed(2)}€`;
+        labelSumIn.textContent = `${formattedIncome}`;
     const outcome = acc.movements
         .filter((mov) => mov < 0)
         .reduce((acc, mov) => acc + mov, 0);
+    const formattedOutcome = formatCur(Math.abs(outcome), acc.locale, acc.currency);
     if (labelSumOut)
-        labelSumOut.textContent = `${Math.abs(outcome).toFixed(2)}€`;
+        labelSumOut.textContent = `${formattedOutcome}`;
     const interest = acc.movements
         .filter((mov) => mov > 0)
         .map((deposit) => (deposit * acc.interestRate) / 100)
         .filter((int) => int > 1)
         .reduce((acc, int) => acc + int, 0);
+    const formattedInterest = formatCur(interest, acc.locale, acc.currency);
     if (labelSumInterest)
-        labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+        labelSumInterest.textContent = `${formattedInterest}`;
 };
 const createUsername = function (accs) {
     accs.forEach((acc) => {
