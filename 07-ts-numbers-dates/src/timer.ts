@@ -1,3 +1,4 @@
+// setTimeout
 for (let i = 1; i <= 3; i++) {
   setTimeout(() => {
     if (i === 3) {
@@ -7,3 +8,9 @@ for (let i = 1; i <= 3; i++) {
     }
   }, i * 1000);
 }
+
+// setInterval
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
