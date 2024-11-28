@@ -236,7 +236,7 @@ const startLogoutTimer = function (): number {
     time--;
   };
   // Set time to 5 minutes
-  let time = 30;
+  let time = 300;
 
   // Call the timer every second
   tick(); // immediately call the function
@@ -247,11 +247,6 @@ const startLogoutTimer = function (): number {
 
 let currentAccount: Account;
 let timer: number;
-
-// Always logged in
-// currentAccount = account1;
-// updateUI(currentAccount);
-// containerApp.style.opacity = "100";
 
 btnLogin.addEventListener("click", function (e: Event): void {
   e.preventDefault();
