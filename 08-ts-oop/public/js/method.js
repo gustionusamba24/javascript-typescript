@@ -1,9 +1,7 @@
 "use strict";
 class Angka {
-    constructor() {
-        this.x = 10;
-        this.y = 10;
-    }
+    x = 10;
+    y = 10;
     scale(n) {
         this.x *= n;
         this.y *= n;
@@ -11,18 +9,14 @@ class Angka {
 }
 let x = 0;
 class C {
-    constructor() {
-        this.x = "hello";
-    }
+    x = "hello";
     m() {
         // This is trying to modify 'x' from line 1, not the class property
         // x = "world"; // accessing x for number type
     }
 }
 class CB {
-    constructor() {
-        this._length = 0;
-    }
+    _length = 0;
     get length() {
         return this._length;
     }
@@ -31,9 +25,7 @@ class CB {
     }
 }
 class Thing {
-    constructor() {
-        this._size = 0;
-    }
+    _size = 0;
     get size() {
         return this._size;
     }

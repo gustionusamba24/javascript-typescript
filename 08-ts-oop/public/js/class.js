@@ -1,16 +1,15 @@
 "use strict";
 class Point {
-    constructor() {
-        // Fields
-        this.x = 0;
-        this.y = 0;
-    }
+    // Fields
+    x = 0;
+    y = 0;
 }
 const pt = new Point();
 pt.x = 2;
 pt.y = 3;
 console.log(`${pt.x}, ${pt.y}`);
 class GoodGreeting {
+    name;
     constructor(name) {
         this.name = name;
     }
@@ -20,8 +19,8 @@ const gg = new GoodGreeting("Gustio");
 console.log(gg.name);
 // readonly
 class Greeter {
+    name = "world";
     constructor(otherName) {
-        this.name = "world";
         if (otherName !== undefined) {
             this.name = otherName;
         }

@@ -1,5 +1,7 @@
 "use strict";
 class Poin {
+    x;
+    y;
     //   Normal signature with defaults
     constructor(x = 0, y = 0) {
         this.x = x;
@@ -7,16 +9,14 @@ class Poin {
     }
 }
 class Poin2 {
+    x = 0;
+    y = 0;
     constructor(x, y = 0) {
-        this.x = 0;
-        this.y = 0;
         // Code logic here
     }
 }
 class Base {
-    constructor() {
-        this.k = 4;
-    }
+    k = 4;
 }
 class Derived extends Base {
     constructor() {
