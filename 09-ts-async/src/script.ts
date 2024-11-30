@@ -5,7 +5,6 @@ const countriesContainer = document.querySelector(".countries");
 function renderCountry(data: any, className = "") {
   const language = Object.keys(data.languages);
   const currency = Object.keys(data.currencies);
-  console.log(language, currency);
 
   const html = `
     <article class="country" ${className}>
@@ -37,8 +36,14 @@ console.log(request);
 function getCountryData(country: string): void {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((response: Response) => response.json())
-    .then((data: any) => renderCountry(data[0]));
+    .then((data: any) => {
+      console.log(data);
+      renderCountry(data[0]);
+      const neighbour = data[0].borders?.[0];
+
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+    })
+    .then((response: Response) => response.json())
+    .then((data: any) => renderCountry(data[0], "neighbour"));
 }
 getCountryData("indonesia");
-getCountryData("argentina");
-getCountryData("germany");
