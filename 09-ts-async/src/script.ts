@@ -30,6 +30,7 @@ function renderCountry(data: any, className = "") {
 }
 
 // Promises and fetch API
+/*
 const request = fetch("https://restcountries.com/v3.1/name/indonesia");
 console.log(request);
 
@@ -46,4 +47,23 @@ function getCountryData(country: string): void {
     .then((response: Response) => response.json())
     .then((data: any) => renderCountry(data[0], "neighbour"));
 }
-getCountryData("indonesia");
+
+btn?.addEventListener("click", () => {
+  getCountryData("indonesia");
+});
+*/
+
+function getPosition() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
+// Async and await
+async function whereAmI(country: string) {
+  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+  const data = await res.json();
+  renderCountry(data[0]);
+}
+whereAmI("spain");
+console.log("FIRST");
