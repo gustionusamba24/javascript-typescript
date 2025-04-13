@@ -1,7 +1,7 @@
 const calcAverageHumanAge2 = function (ages: number[]): void {
   const averageHumanAge = ages
-    .map((age: number): number => (age <= 2 ? 2 * age : 16 + age * 4))
-    .filter((age: number): boolean => age >= 18)
+    .map((age): number => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age): boolean => age >= 18)
     .reduce(
       (acc: number, age: number, i: number, arr: number[]): number =>
         acc + age / arr.length,

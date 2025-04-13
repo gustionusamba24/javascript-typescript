@@ -5,6 +5,7 @@ const arr3 = [
   [4, 5, 6],
   [7, 8, 9],
 ];
+console.log("Example 1");
 console.log(arr3.flat());
 
 const arrDeeper = [
@@ -14,5 +15,8 @@ const arrDeeper = [
     [[6, 7], 8],
   ],
 ];
+console.log("example 2");
 console.log(arrDeeper.flat());
+
+console.log("example 3");
 console.log(arrDeeper.flat(3));
