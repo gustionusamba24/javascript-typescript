@@ -1,0 +1,17 @@
+{
+  "name": "recipe-app",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Gustio Nusamba",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/rust": "^2.14.4",
+    "@parcel/transformer-sass": "^2.14.4",
+    "parcel": "^2.14.4",
+    "sass": "^1.26.10"
+  }
+}
