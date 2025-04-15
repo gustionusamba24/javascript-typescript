@@ -1,0 +1,8 @@
+# parcel
+.parcel-cache/
+
+# build output
+dist/
+
+# node_modules
+node_modules/
