@@ -160,15 +160,15 @@
       });
     }
   }
-})({"6gbjq":[function(require,module,exports,__globalThis) {
+})({"5DuvQ":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
-var HMR_ENV_HASH = "d6ea1d42532a7575";
+var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "0907ca6d3464ddca";
+module.bundle.HMR_BUNDLE_ID = "8ad96e854a59a05f";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,8 +666,41 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"j4kuM":[function(require,module,exports,__globalThis) {
+},{}],"7dWZ8":[function(require,module,exports,__globalThis) {
+const recipeContainer = document.querySelector(".recipe");
+const timeout = function(s) {
+    return new Promise(function(_, reject) {
+        setTimeout(function() {
+            reject(new Error(`Request took too long! Timeout after ${s} second`));
+        }, s * 1000);
+    });
+};
+// NEW API URL (instead of the one shown in the video)
+// https://forkify-api.jonas.io
+///////////////////////////////////////
+const showRecipe = async function() {
+    try {
+        const result = await fetch("https://forkify-api.jonas.io/api/v2/recipes/664c8f193e7aa067e94e8906");
+        const data = await result.json();
+        if (!result.ok) throw new Error(`${data.message}: ${result.status}`);
+        let { recipe } = data.data;
+        recipe = {
+            id: recipe.id,
+            title: recipe.title,
+            ingredients: recipe.ingredients,
+            publisher: recipe.publisher,
+            servings: recipe.servings,
+            imageUrl: recipe.image_url,
+            sourceUrl: recipe.source_url,
+            cookingTime: recipe.cooking_time
+        };
+        console.log(recipe);
+    } catch (error) {
+        alert(error);
+    }
+};
+showRecipe();
 
-},{}]},["6gbjq","j4kuM"], "j4kuM", "parcelRequire041d", {})
+},{}]},["5DuvQ","7dWZ8"], "7dWZ8", "parcelRequire041d", {})
 
-//# sourceMappingURL=recipe-app.3464ddca.js.map
+//# sourceMappingURL=recipe-app.4a59a05f.js.map
