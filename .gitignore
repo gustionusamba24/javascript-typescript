@@ -4,3 +4,9 @@
 
 # Modules
 node_modules/
+
+# parcel
+.parcel-cache/
+
+# build output
+dist/
